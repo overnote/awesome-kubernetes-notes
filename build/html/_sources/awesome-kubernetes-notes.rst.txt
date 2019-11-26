@@ -1596,7 +1596,7 @@ annotations 与 label
        app: myapp
        tier: frontend
      annotations:                                      # 注解关键字
-       jinheng/created-by: "xuel"               # 添加键值对的资源注解
+       kaliarch/created-by: "xuel"               # 添加键值对的资源注解
    spec:
      containers:
      - name: myapp
@@ -2532,7 +2532,7 @@ Envoy 软件。
        kubernetes.io/ingress.class: "nginx"
    spec:
      rules:
-       - host: myapp.jinheng.com                       # 基于主机名的访问
+       - host: myapp.kaliarch.com                       # 基于主机名的访问
          http:
            paths:
              - path:                                   # 空的时候代表根，访问根的时候映射到 backend
@@ -2551,7 +2551,7 @@ Envoy 软件。
 
 .. code:: bash
 
-   http://myapp.jinheng.com:30080/index.html
+   http://myapp.kaliarch.com:30080/index.html
 
 9.3 ingress-tomcat 代理
 -----------------------
@@ -2612,7 +2612,7 @@ Envoy 软件。
    openssl genrsa -out tls.key 2048
 
    # 生成自签证书，CN=域名必须要与自己的域名完全一致
-   openssl req -new -x509 -key tls.key -out tls.crt -subj /C=CN/ST=Beijing/L=Beijing/O=DevOps/CN=tomcat.jinheng.com
+   openssl req -new -x509 -key tls.key -out tls.crt -subj /C=CN/ST=Beijing/L=Beijing/O=DevOps/CN=tomcat.kaliarch.com
 
 -  创建 secret 证书对象，它是标准的 k8s 对象
 
@@ -2636,10 +2636,10 @@ Envoy 软件。
    spec:
      tls:
        - hosts:
-         - tomcat.jinheng.com
+         - tomcat.kaliarch.com
          secretName: tomcat-ingress-secret
      rules:
-       - host: tomcat.jinheng.com
+       - host: tomcat.kaliarch.com
          http:
            paths:
              - path:
@@ -2658,7 +2658,7 @@ Envoy 软件。
 
 .. code:: bash
 
-   https://tomcat.jinheng.com:30443
+   https://tomcat.kaliarch.com:30443
 
 十 POD 存储卷
 =============
@@ -3375,10 +3375,10 @@ POD 提供存储空间，而是为用户提供了从集群外部到 POD
      name: nginx-config
      namespace: default
    data:
-     server_name: myapp.jinheng.com                       # 键值对数据
+     server_name: myapp.kaliarch.com                       # 键值对数据
      nginx_port: |                                        # 键值对数据，此处为 nginx 配置文件，需要注意换行的写法
        server {
-           server_name  myapp.jinheng.com;
+           server_name  myapp.kaliarch.com;
            listen  80;
            root  /data/web/html;
        }
@@ -3393,7 +3393,7 @@ POD 提供存储空间，而是为用户提供了从集群外部到 POD
        app: myapp
        tier: frontend
      annotations:
-       jinheng.com/created-by: "cluster amdin"
+       kaliarch.com/created-by: "cluster amdin"
    spec:
      containers:
        - name: myapp
@@ -3450,7 +3450,7 @@ POD 提供存储空间，而是为用户提供了从集群外部到 POD
            }                                                                                                                                     
        } 
        server {
-           server_name  myapp.jinheng.com;
+           server_name  myapp.kaliarch.com;
            listen  80;
            root  /data/web/html;
        }
@@ -3465,7 +3465,7 @@ POD 提供存储空间，而是为用户提供了从集群外部到 POD
        app: myapp
        tier: frontend
      annotations:
-       jinheng.com/created-by: "cluster amdin"
+       kaliarch.com/created-by: "cluster amdin"
    spec:
      containers:
        - name: myapp
@@ -3509,7 +3509,7 @@ POD 提供存储空间，而是为用户提供了从集群外部到 POD
    $ curl 10.244.2.104
    Hello MyApp | Version: v1 | <a href="hostname.html">Pod Name</a>
 
-   $ curl -H "Host:myapp.jinheng.com" 10.244.2.104
+   $ curl -H "Host:myapp.kaliarch.com" 10.244.2.104
    <h1>this is a test page<h1>
 
 11.3 secret
@@ -3635,7 +3635,7 @@ configMap 是明文存储数据的，如果需要存储敏感数据，则需要�
        app: myapp
        tier: frontend
      annotations:
-       jinheng.com/created-by: "cluster amdin"
+       kaliarch.com/created-by: "cluster amdin"
    spec:
      containers:
        - name: myapp
@@ -4079,43 +4079,43 @@ k8s apiserver 认证方式有两种：ssl证书 和 token 认证，本次使用 
 .. code:: bash
 
    # 创建私钥
-   (umask 077; openssl genrsa -out jinheng.key 2048)
+   (umask 077; openssl genrsa -out kaliarch.key 2048)
 
    # 生成证书签署请求，O 是组，CN 就是账号，这个账号被 k8s 用来识别身份，授权也需要授权这个账号
-   openssl req -new -key jinheng.key -out jinheng.csr -subj "/CN=jinheng"
-   #penssl req -new -key jinheng.key -out jinheng.csr -subj "O=system:masters/CN=jinheng/"
+   openssl req -new -key kaliarch.key -out kaliarch.csr -subj "/CN=kaliarch"
+   #penssl req -new -key kaliarch.key -out kaliarch.csr -subj "O=system:masters/CN=kaliarch/"
 
    # 使用 CA 签署证书，并且在 1800 天内有效
-   openssl x509 -req -in jinheng.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out jinheng.crt -days 1800
+   openssl x509 -req -in kaliarch.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out kaliarch.crt -days 1800
 
    # 查看证书
-   openssl x509 -in jinheng.crt -text -noout
+   openssl x509 -in kaliarch.crt -text -noout
 
 13.5.2 添加SSL证书用户到config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  将 jinheng 用户添加到 k8s 的 config 中，设置客户端证书为
-   jinheng.crt，设置客户端私钥为：jinheng.key，使用 –embed-certs=true
+-  将 kaliarch 用户添加到 k8s 的 config 中，设置客户端证书为
+   kaliarch.crt，设置客户端私钥为：kaliarch.key，使用 –embed-certs=true
    来隐藏这些机密信息
 
 .. code:: bash
 
-   kubectl config set-credentials jinheng --client-certificate=./jinheng.crt --client-key=./jinheng.key --embed-certs=true
+   kubectl config set-credentials kaliarch --client-certificate=./kaliarch.crt --client-key=./kaliarch.key --embed-certs=true
 
 13.5.3 创建切换上下文
 ~~~~~~~~~~~~~~~~~~~~~
 
--  创建上下文对象，授权 jinheng 用户访问名称为 kubernetes 的集群
+-  创建上下文对象，授权 kaliarch 用户访问名称为 kubernetes 的集群
 
 .. code:: bash
 
-   kubectl config set-context jinheng@kubernetes --cluster=kubernetes --user=jinheng
+   kubectl config set-context kaliarch@kubernetes --cluster=kubernetes --user=kaliarch
 
--  切换当前使用的上下文，到授权 jinheng 到 kubernetes 的上下文上
+-  切换当前使用的上下文，到授权 kaliarch 到 kubernetes 的上下文上
 
 .. code:: bash
 
-   kubectl config use-context jinheng@kubernetes
+   kubectl config use-context kaliarch@kubernetes
 
 -  由于这个用户没有授权，所以这个用户是无法 get 到信息的，可以再切换回来
 
@@ -4138,21 +4138,21 @@ k8s apiserver 认证方式有两种：ssl证书 和 token 认证，本次使用 
 
    kubectl config set-cluster k8s-cluster --server=https://172.16.100.101:6443 --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=/tmp/test.conf 
 
--  将 jinheng 用户添加到 k8s 的 config 中，设置客户端证书为
-   jinheng.crt，设置客户端私钥为：jinheng.key，使用 –embed-certs=true
+-  将 kaliarch 用户添加到 k8s 的 config 中，设置客户端证书为
+   kaliarch.crt，设置客户端私钥为：kaliarch.key，使用 –embed-certs=true
    来隐藏这些机密信息
 
 .. code:: bash
 
-   kubectl config set-credentials jinheng --client-certificate=./jinheng.crt --client-key=./jinheng.key --embed-certs=true
+   kubectl config set-credentials kaliarch --client-certificate=./kaliarch.crt --client-key=./kaliarch.key --embed-certs=true
 
--  创建上下文对象，授权 jinheng 用户访问名称为 kubernetes 的集群
+-  创建上下文对象，授权 kaliarch 用户访问名称为 kubernetes 的集群
 
 .. code:: bash
 
    kubectl config set-context def-ns-admin@k8s-cluster --cluster=k8s-cluster --user=def-ns-admin --kubeconfig=/tmp/test.conf
 
--  切换当前使用的上下文，到授权 jinheng 到 kubernetes 的上下文上
+-  切换当前使用的上下文，到授权 kaliarch 到 kubernetes 的上下文上
 
 .. code:: bash
 
@@ -4285,7 +4285,7 @@ RBAC 中，用户授权就是授权某个角色。
 
 .. code:: bash
 
-   kubectl create rolebinding jinheng-read-pods --role=pods-reader --user=jinheng
+   kubectl create rolebinding kaliarch-read-pods --role=pods-reader --user=kaliarch
 
 -  使用清单方式定义
 
@@ -4294,7 +4294,7 @@ RBAC 中，用户授权就是授权某个角色。
    apiVersion: rbac.authorization.k8s.io/v1
    kind: RoleBinding
    metadata:
-     name: jinheng-read-pods
+     name: kaliarch-read-pods
    roleRef:
      apiGroup: rbac.authorization.k8s.io
      kind: Role
@@ -4302,13 +4302,13 @@ RBAC 中，用户授权就是授权某个角色。
    subjects:
    - apiGroup: rbac.authorization.k8s.io
      kind: User
-     name: jinheng
+     name: kaliarch
 
 -  切换用户和环境上下文
 
 .. code:: bash
 
-   $ kubectl config use-context jinheng@kubernetes
+   $ kubectl config use-context kaliarch@kubernetes
 
 -  测试用户是否拥有 get 权限
 
@@ -4374,7 +4374,7 @@ RBAC 中，用户授权就是授权某个角色。
 
 .. code:: bash
 
-   kubectl create clusterrolebinding jinheng-read-all-pods --clusterrole=cluster-reader --user=jinheng
+   kubectl create clusterrolebinding kaliarch-read-all-pods --clusterrole=cluster-reader --user=kaliarch
 
 -  清单定义
 
@@ -4383,7 +4383,7 @@ RBAC 中，用户授权就是授权某个角色。
    apiVersion: rbac.authorization.k8s.io/v1beta1
    kind: ClusterRoleBinding
    metadata:
-     name: jinheng-read-all-pods
+     name: kaliarch-read-all-pods
    roleRef:
      apiGroup: rbac.authorization.k8s.io
      kind: ClusterRole
@@ -4391,13 +4391,13 @@ RBAC 中，用户授权就是授权某个角色。
    subjects:
    - apiGroup: rbac.authorization.k8s.io
      kind: User
-     name: jinheng
+     name: kaliarch
 
 -  切换用户和环境上下文
 
 .. code:: bash
 
-   $ kubectl config use-context jinheng@kubernetes
+   $ kubectl config use-context kaliarch@kubernetes
 
 -  测试用户是否拥有 get 权限
 
@@ -4417,7 +4417,7 @@ RBAC 中，用户授权就是授权某个角色。
 
 .. code:: bash
 
-   $ kubectl create rolebinding jinheng-cluster-reader --clusterrole=cluster-reader --user=jinheng
+   $ kubectl create rolebinding kaliarch-cluster-reader --clusterrole=cluster-reader --user=kaliarch
 
 -  清单定义
 
@@ -4426,7 +4426,7 @@ RBAC 中，用户授权就是授权某个角色。
    apiVersion: rbac.authorization.k8s.io/v1
    kind: RoleBinding
    metadata:
-     name: jinheng-admin
+     name: kaliarch-admin
    roleRef:
      apiGroup: rbac.authorization.k8s.io
      kind: ClusterRole
@@ -4434,13 +4434,13 @@ RBAC 中，用户授权就是授权某个角色。
    subjects:
    - apiGroup: rbac.authorization.k8s.io
      kind: User
-     name: jinheng
+     name: kaliarch
 
 -  切换用户和环境上下文
 
 .. code:: bash
 
-   $ kubectl config use-context jinheng@kubernetes
+   $ kubectl config use-context kaliarch@kubernetes
 
 -  测试用户是否拥有 get 权限，由于使用了 rolebinding ，所以
    cluster-reader 被限制到当前命名空间
@@ -4467,16 +4467,16 @@ RBAC 中，用户授权就是授权某个角色。
 .. code:: bash
 
    # 创建私钥
-   (umask 077; openssl genrsa -out jinheng.key 2048)
+   (umask 077; openssl genrsa -out kaliarch.key 2048)
 
    # 生成证书签署请求，O 是组，CN 就是账号，这个账号被 k8s 用来识别身份，授权也需要授权这个账号
-   openssl req -new -key jinheng.key -out jinheng.csr -subj "O=system:masters/CN=jinheng/"
+   openssl req -new -key kaliarch.key -out kaliarch.csr -subj "O=system:masters/CN=kaliarch/"
 
    # 使用 CA 签署证书，并且在 1800 天内有效
-   openssl x509 -req -in jinheng.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out jinheng.crt -days 1800
+   openssl x509 -req -in kaliarch.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out kaliarch.crt -days 1800
 
    # 查看证书
-   openssl x509 -in jinheng.crt -text -noout
+   openssl x509 -in kaliarch.crt -text -noout
 
 十五 dashboard
 ==============
@@ -4639,13 +4639,13 @@ rolebinding 去绑定 admin 这个 clusterrolue
 
    kubectl config set-credentials def-ns-admin --token=<TOKEN> --kubeconfig=/tmp/test.conf
 
--  创建上下文对象，授权 jinheng 用户访问名称为 kubernetes 的集群
+-  创建上下文对象，授权 kaliarch 用户访问名称为 kubernetes 的集群
 
 .. code:: bash
 
    kubectl config set-context def-ns-admin@k8s-cluster --cluster=k8s-cluster --user=def-ns-admin --kubeconfig=/tmp/test.conf
 
--  切换当前使用的上下文，到授权 jinheng 到 kubernetes 的上下文上
+-  切换当前使用的上下文，到授权 kaliarch 到 kubernetes 的上下文上
 
 .. code:: bash
 
@@ -6967,4 +6967,27 @@ helm
 参考链接
 --------
 
-https://www.qikqiak.com/page/archive/
+-  `Kubernetes官网教程 <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__
+-  `Kubernetes中文社区 <https://www.kubernetes.org.cn/k8s>`__
+-  `从Kubernetes到Cloud
+   Native <https://jimmysong.io/kubernetes-handbook/cloud-native/from-kubernetes-to-cloud-native.html>`__
+-  `Kubernetes
+   Handbook <https://www.bookstack.cn/read/feiskyer-kubernetes-handbook/appendix-ecosystem.md>`__
+-  `Kubernetes从入门到实战 <https://www.kancloud.cn/huyipow/kubernetes/722822>`__
+-  `Kubernetes指南 <https://kubernetes.feisky.xyz/>`__
+-  `awesome-kubernetes <https://ramitsurana.github.io/awesome-kubernetes/>`__
+-  `从Docker到Kubernetes进阶 <https://www.qikqiak.com/k8s-book/>`__
+-  `python微服务实战 <https://www.qikqiak.com/tdd-book/>`__
+-  `云原生之路 <https://jimmysong.io/kubernetes-handbook/cloud-native/from-kubernetes-to-cloud-native.html>`__
+-  `CNCF Cloud Native Interactive
+   Landscape <https://landscape.cncf.io/>`__ ### 视频
+-  `马哥(docker容器技术+k8s集群技术) <https://www.bilibili.com/video/av35847195/?p=16&t=3931>`__
+-  `微服务容器化实战 <https://www.acfun.cn/v/ac10232871>`__
+
+--------------
+
+如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流👏 ###
+请我喝咖啡☕️ \* 微信 |微信| \* 支付宝 |支付宝|
+
+.. |微信| image:: https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/weixin.png
+.. |支付宝| image:: https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/zfb.png
