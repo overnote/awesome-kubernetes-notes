@@ -7,7 +7,7 @@
 > - [掘金](https://juejin.im/user/5c36033fe51d456e4138b473/posts)
 > - [慕课网](https://www.imooc.com/u/1260704)
 
-> awesome-kubernetes-notes：[在线阅读](https://kubernetes-note.readthedocs.io/en/latest/)
+> awesome-kubernetes-notes：[在线阅读](https://awesome-kubernetes-notes.readthedocs.io/en/latest/)
 
 # 目录
 
