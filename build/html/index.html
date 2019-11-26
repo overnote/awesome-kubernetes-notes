@@ -195,24 +195,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id8">三 集群部署</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id9">3.1 部署前准备</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#firewalld-selinux">3.1.1 关闭 firewalld 和 selinux</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#ipvs">3.1.2 加载 ipvs 内核模块</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#docker-k8s">3.1.3 下载 Docker 和 K8S</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#k8s">3.1.4 设置内核及 K8S 参数</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#master">3.2 部署 Master</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id10">3.2.1 提前拉取镜像</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id11">3.2.2 初始化Master</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#node">3.3 部署 Node</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id12">3.3.1 加入集群</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id13">3.3.2 查看进度</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id14">3.3.3 下载太慢</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id9">3.1 部署前准备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#master">3.2 部署 Master</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#node">3.3 部署 Node</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id15">四 入门命令</a><ul>
@@ -244,42 +229,14 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id28">六 POD 配置清单</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#pods-metadata-pod">6.1 pods.metadata POD元数据</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id29">6.1.1 labels 标签</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#pods-spec">6.2 pods.spec 规范</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#nodename">6.2.1 nodeName 运行节点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#nodeselector">6.2.2 nodeSelector 节点选择</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#restartpolicy-pod">6.2.3 restartPolicy POD重启策略</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#hostnetwork">6.2.4 hostNetwork 主机网络空间</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#hostpid-pid">6.2.5 hostPID 主机PID空间</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#containers">6.2.6 containers 配置</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#pods-metadata-pod">6.1 pods.metadata POD元数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#pods-spec">6.2 pods.spec 规范</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id31">七 控制器配置清单</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#replicaset">7.1 ReplicaSet 控制器</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#replicaset-spec">7.1.1 replicaset.spec 规范</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id32">7.1.2 清单示例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#deployment">7.2 Deployment控制器</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id33">7.2.1 replicaset.spec 对象规范</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id34">7.2.2 清单示例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id36">7.2.3 关于更新</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id37">7.2.4 模拟金丝雀发布</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id38">7.2.5 更新策略</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id39">7.2.6 关于回滚</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#daemonset">7.3 DaemonSet控制器</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#daemonset-spec">7.3.1 DaemonSet.spec规范</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id40">7.3.2 清单示例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id42">7.3.3 关于更新</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#replicaset">7.1 ReplicaSet 控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#deployment">7.2 Deployment控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#daemonset">7.3 DaemonSet控制器</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id44">八 Service 配置清单</a><ul>
@@ -304,43 +261,16 @@
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id50">十 POD 存储卷</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id51">10.1 卷的类型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id52">10.2 容器挂载选项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id53">10.3 节点存储</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#hostpath">10.3.1 hostpath存储卷</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#gitrepo">10.3.2 gitRepo卷</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#emptydir">10.3.3 emptyDir缓存卷</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id54">10.4 网络存储</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#nfs">10.4.1 nfs</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id55">10.5 分布式存储</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#persistentvolume">10.5.1 PersistentVolume</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#persistentvolumeclaim">10.5.2. PersistentVolumeClaim</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#storageclass">10.5.3 StorageClass</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#storageclass-ceph-rbd">10.6 StorageClass Ceph RBD</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#ceph">10.6.1 配置 Ceph 储存池</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#rbd-provisioner">10.6.2 安装 rbd-provisioner</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id56">10.6.3 使用 StorageClass</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id53">10.3 节点存储</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id54">10.4 网络存储</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id55">10.5 分布式存储</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#storageclass-ceph-rbd">10.6 StorageClass Ceph RBD</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id57">十一 配置信息容器化</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id58">11.1 POD 获取环境变量</a></li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#configmap">11.2 configMap</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#pod-env">11.2.1 注入 POD ENV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id59">11.2.2 挂载为 POD 卷</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#secret">11.3 secret</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id60">11.3.1 私有仓库认证1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id61">11.3.2 私有仓库认证2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#tls">11.3.3 创建 TLS 证书</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#configmap">11.2 configMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#secret">11.3 secret</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#statefulset">十二 StatefulSet 控制器</a><ul>
@@ -353,24 +283,11 @@
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id65">十三 用户认证系统</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id66">13.1 用户的类型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id67">13.2 POD如何连接集群</a></li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#serviceaccount">13.3 serviceaccount 对象</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#pod-serviceaccount">13.3.1 在 POD 中使用 serviceaccount</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#serviceaccount">13.3 serviceaccount 对象</a></li>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id68">13.4 kubectl 配置文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#config">13.5 添加证书用户到 config</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#ssl">13.5.1 创建SSL证书用户</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#sslconfig">13.5.2 添加SSL证书用户到config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id69">13.5.3 创建切换上下文</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#config">13.5 添加证书用户到 config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id70">13.6 创建新 config 文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#token">13.7 基于 token 认证</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id71">13.7.1 创建 serviceaccount</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id72">13.7.2 绑定集群管理员角色</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#serviceaccount-token">13.7.3 通过 serviceaccount 得到 Token</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#token">13.7 基于 token 认证</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id73">十四 用户权限系统</a><ul>
@@ -395,20 +312,8 @@
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id81">16.2 通信模型底层</a></li>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id82">16.3 K8S 名称空间</a></li>
 <li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#id83">16.4 K8S网络拓扑</a></li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#flannel">16.5 flannel</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id84">16.5.1 flannel 工作模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#vxlan">16.5.2 VXLAN 通信过程</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id85">16.5.3 flannel 部署方式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id86">16.5.4flannel 配置文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id87">16.5.5 修改工作模式</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#calico">16.6 Calico</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#canal">16.6.1 安装 canal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#id88">16.6.2 清单定义</a></li>
-<li class="toctree-l3"><a class="reference internal" href="awesome-kubernetes-notes.html#policytypes">16.6.3policyTypes</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#flannel">16.5 flannel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="awesome-kubernetes-notes.html#calico">16.6 Calico</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="awesome-kubernetes-notes.html#id89">十七 调度策略</a><ul>
