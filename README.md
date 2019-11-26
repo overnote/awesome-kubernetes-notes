@@ -159,8 +159,11 @@
     * ##### 22.7 Helm Elasticsearch
     * ##### 22.8 Helm fluentd-elasticsearch
     * ##### 22.9 Helm kibana
-* ## 学习链接
-    * ##### 文档
+    
+---
+    
+## 学习链接
+#### 文档
 * [Kubernetes官网教程](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 * [Kubernetes中文社区](https://www.kubernetes.org.cn/k8s)
 * [从Kubernetes到Cloud Native](https://jimmysong.io/kubernetes-handbook/cloud-native/from-kubernetes-to-cloud-native.html)
@@ -172,13 +175,17 @@
 * [python微服务实战](https://www.qikqiak.com/tdd-book/)
 * [云原生之路](https://jimmysong.io/kubernetes-handbook/cloud-native/from-kubernetes-to-cloud-native.html)
 * [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/)
-    * ##### 视频
+
+#### 视频
+
 * [马哥(docker容器技术+k8s集群技术)](https://www.bilibili.com/video/av35847195/?p=16&t=3931)
 * [微服务容器化实战](https://www.acfun.cn/v/ac10232871)
 
 ---
 如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流🎉
-    * ##### 请我喝咖啡☕️
+
+扫一扫请我喝咖啡☕️
+
 * 微信
 
 ![微信](https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/weixin.png)
