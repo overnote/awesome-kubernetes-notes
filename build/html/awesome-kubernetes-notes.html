@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>一 Kubernetes概述 &mdash; KaliArch&#39;s Kubernetes-Note 1.0.0 documentation</title>
+  <title>一 Kubernetes概述 &mdash; KaliArch&#39;s awesome-kubernetes-notes 1.0.0 documentation</title>
   
 
   
@@ -35,7 +35,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to kaliarch kubernetes-note’s documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> KaliArch's Kubernetes-Note
+            <a href="index.html" class="icon icon-home"> KaliArch's awesome-kubernetes-notes
           
 
           
@@ -83,308 +84,308 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">一 Kubernetes概述</a><ul>
-<li><a class="reference internal" href="#id1">1.1 容器编排工具</a></li>
-<li><a class="reference internal" href="#id2">1.2 kubernetes</a></li>
-<li><a class="reference internal" href="#id3">1.3 环境架构</a></li>
-<li><a class="reference internal" href="#id4">1.4 架构和组件</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">一 Kubernetes概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.1 容器编排工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.2 kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.3 环境架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.4 架构和组件</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id5">二 核心组件/附件</a><ul>
-<li><a class="reference internal" href="#controller">2.1 Controller</a></li>
-<li><a class="reference internal" href="#service">2.2 Service</a></li>
-<li><a class="reference internal" href="#id6">2.3 网络模型</a></li>
-<li><a class="reference internal" href="#kube-proxy">2.4 kube-proxy</a></li>
-<li><a class="reference internal" href="#etcd">2.5 etcd</a></li>
-<li><a class="reference internal" href="#flanel">2.6 flanel</a></li>
-<li><a class="reference internal" href="#id7">知识小结</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id5">二 核心组件/附件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#controller">2.1 Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#service">2.2 Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.3 网络模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kube-proxy">2.4 kube-proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etcd">2.5 etcd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flanel">2.6 flanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">知识小结</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id8">三 集群部署</a><ul>
-<li><a class="reference internal" href="#id9">3.1 部署前准备</a><ul>
-<li><a class="reference internal" href="#firewalld-selinux">3.1.1 关闭 firewalld 和 selinux</a></li>
-<li><a class="reference internal" href="#ipvs">3.1.2 加载 ipvs 内核模块</a></li>
-<li><a class="reference internal" href="#docker-k8s">3.1.3 下载 Docker 和 K8S</a></li>
-<li><a class="reference internal" href="#k8s">3.1.4 设置内核及 K8S 参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id8">三 集群部署</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id9">3.1 部署前准备</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#firewalld-selinux">3.1.1 关闭 firewalld 和 selinux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipvs">3.1.2 加载 ipvs 内核模块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-k8s">3.1.3 下载 Docker 和 K8S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#k8s">3.1.4 设置内核及 K8S 参数</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#master">3.2 部署 Master</a><ul>
-<li><a class="reference internal" href="#id10">3.2.1 提前拉取镜像</a></li>
-<li><a class="reference internal" href="#id11">3.2.2 初始化Master</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#master">3.2 部署 Master</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">3.2.1 提前拉取镜像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">3.2.2 初始化Master</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#node">3.3 部署 Node</a><ul>
-<li><a class="reference internal" href="#id12">3.3.1 加入集群</a></li>
-<li><a class="reference internal" href="#id13">3.3.2 查看进度</a></li>
-<li><a class="reference internal" href="#id14">3.3.3 下载太慢</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id15">四 入门命令</a><ul>
-<li><a class="reference internal" href="#kubectl">4.1 kubectl</a></li>
-<li><a class="reference internal" href="#run">4.2 run</a></li>
-<li><a class="reference internal" href="#expose">4.3 expose</a></li>
-<li><a class="reference internal" href="#cp">4.4 cp</a></li>
-<li><a class="reference internal" href="#port-forward">4.5 port-forward</a></li>
-<li><a class="reference internal" href="#coredns">4.6 coredns</a></li>
-<li><a class="reference internal" href="#pod">4.7模拟 POD 被删除</a></li>
-<li><a class="reference internal" href="#id16">4.8 模拟 service 被删除</a></li>
-<li><a class="reference internal" href="#labels">4.9 labels</a></li>
-<li><a class="reference internal" href="#id17">4.10 动态扩容</a></li>
-<li><a class="reference internal" href="#id18">4.11 滚动升级</a></li>
-<li><a class="reference internal" href="#id19">4.12 集群外访问</a></li>
-<li><a class="reference internal" href="#id20">4.13 排查日志</a></li>
-<li><a class="reference internal" href="#id21">4.14 连入 POD 容器</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id22">五 配置清单使用</a><ul>
-<li><a class="reference internal" href="#id23">5.1 可配置的对象</a></li>
-<li><a class="reference internal" href="#id24">5.2 配置清单组成</a></li>
-<li><a class="reference internal" href="#id25">5.3 获取清单帮助</a></li>
-<li><a class="reference internal" href="#id26">5.4 清单基本格式</a></li>
-<li><a class="reference internal" href="#id27">5.5 快捷获取清单</a></li>
-<li><a class="reference internal" href="#create">5.6 create 创建</a></li>
-<li><a class="reference internal" href="#delete">5.7 delete 删除</a></li>
-<li><a class="reference internal" href="#applay">5.8 applay 创建或更新</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id28">六 POD 配置清单</a><ul>
-<li><a class="reference internal" href="#pods-metadata-pod">6.1 pods.metadata POD元数据</a><ul>
-<li><a class="reference internal" href="#id29">6.1.1 labels 标签</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pods-spec">6.2 pods.spec 规范</a><ul>
-<li><a class="reference internal" href="#nodename">6.2.1 nodeName 运行节点</a></li>
-<li><a class="reference internal" href="#nodeselector">6.2.2 nodeSelector 节点选择</a></li>
-<li><a class="reference internal" href="#restartpolicy-pod">6.2.3 restartPolicy POD重启策略</a></li>
-<li><a class="reference internal" href="#hostnetwork">6.2.4 hostNetwork 主机网络空间</a></li>
-<li><a class="reference internal" href="#hostpid-pid">6.2.5 hostPID 主机PID空间</a></li>
-<li><a class="reference internal" href="#containers">6.2.6 containers 配置</a><ul>
-<li><a class="reference internal" href="#imagepullpolicy">6.2.6.1 imagePullPolicy下载策略</a></li>
-<li><a class="reference internal" href="#ports">6.2.6.2 ports 端口信息</a></li>
-<li><a class="reference internal" href="#env">6.2.6.3 env 传递环境变量</a></li>
-<li><a class="reference internal" href="#command-entrypoint">6.2.6.4 command ENTRYPOINT</a></li>
-<li><a class="reference internal" href="#args-cmd">6.2.6.5 args CMD</a></li>
-<li><a class="reference internal" href="#annotations">6.2.6.6 annotations 注解信息</a></li>
-<li><a class="reference internal" href="#id30">6.2.6.7 POD 生命周期</a></li>
-<li><a class="reference internal" href="#livenessprobe">6.2.6.8 livenessProbe 存活性探测</a></li>
-<li><a class="reference internal" href="#readinessprobe">6.2.6.9 readinessProbe 就绪性检测</a></li>
-<li><a class="reference internal" href="#lifecycle">6.2.6.10 lifecycle 生命周期钩子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#node">3.3 部署 Node</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">3.3.1 加入集群</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">3.3.2 查看进度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">3.3.3 下载太慢</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#id15">四 入门命令</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kubectl">4.1 kubectl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run">4.2 run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expose">4.3 expose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cp">4.4 cp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-forward">4.5 port-forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coredns">4.6 coredns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pod">4.7模拟 POD 被删除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">4.8 模拟 service 被删除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#labels">4.9 labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">4.10 动态扩容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">4.11 滚动升级</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">4.12 集群外访问</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">4.13 排查日志</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id21">4.14 连入 POD 容器</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id31">七 控制器配置清单</a><ul>
-<li><a class="reference internal" href="#replicaset">7.1 ReplicaSet 控制器</a><ul>
-<li><a class="reference internal" href="#replicaset-spec">7.1.1 replicaset.spec 规范</a></li>
-<li><a class="reference internal" href="#id32">7.1.2 清单示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id22">五 配置清单使用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id23">5.1 可配置的对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id24">5.2 配置清单组成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id25">5.3 获取清单帮助</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id26">5.4 清单基本格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">5.5 快捷获取清单</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create">5.6 create 创建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delete">5.7 delete 删除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applay">5.8 applay 创建或更新</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#deployment">7.2 Deployment控制器</a><ul>
-<li><a class="reference internal" href="#id33">7.2.1 replicaset.spec 对象规范</a></li>
-<li><a class="reference internal" href="#id34">7.2.2 清单示例</a></li>
-<li><a class="reference internal" href="#id36">7.2.3 关于更新</a></li>
-<li><a class="reference internal" href="#id37">7.2.4 模拟金丝雀发布</a></li>
-<li><a class="reference internal" href="#id38">7.2.5 更新策略</a></li>
-<li><a class="reference internal" href="#id39">7.2.6 关于回滚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id28">六 POD 配置清单</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pods-metadata-pod">6.1 pods.metadata POD元数据</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id29">6.1.1 labels 标签</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#daemonset">7.3 DaemonSet控制器</a><ul>
-<li><a class="reference internal" href="#daemonset-spec">7.3.1 DaemonSet.spec规范</a></li>
-<li><a class="reference internal" href="#id40">7.3.2 清单示例</a></li>
-<li><a class="reference internal" href="#id42">7.3.3 关于更新</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id44">八 Service 配置清单</a><ul>
-<li><a class="reference internal" href="#id45">8.1 Service 工作模式</a></li>
-<li><a class="reference internal" href="#id46">8.2 Service 类型</a></li>
-<li><a class="reference internal" href="#id47">8.3 资源记录</a></li>
-<li><a class="reference internal" href="#id48">8.4 Service 清单</a></li>
-<li><a class="reference internal" href="#service-spec">8.5 service.spec 规范</a></li>
-<li><a class="reference internal" href="#clusterip-service">8.6 ClusterIP 类型的 service</a></li>
-<li><a class="reference internal" href="#nodeport-service">8.7 NodePort 类型的 service</a></li>
-<li><a class="reference internal" href="#loadbalancerip">8.8 loadBalancerIP 类型</a></li>
-<li><a class="reference internal" href="#id49">8.9 无集群地址的 Service</a></li>
-<li><a class="reference internal" href="#externalname">8.10 externalName 类型</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ingress">九 ingress 控制器</a><ul>
-<li><a class="reference internal" href="#ingress-spec">9.1 ingress.spec 规范</a></li>
-<li><a class="reference internal" href="#ingress-nginx">9.2 ingress-nginx 代理</a></li>
-<li><a class="reference internal" href="#ingress-tomcat">9.3 ingress-tomcat 代理</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id50">十 POD 存储卷</a><ul>
-<li><a class="reference internal" href="#id51">10.1 卷的类型</a></li>
-<li><a class="reference internal" href="#id52">10.2 容器挂载选项</a></li>
-<li><a class="reference internal" href="#id53">10.3 节点存储</a><ul>
-<li><a class="reference internal" href="#hostpath">10.3.1 hostpath存储卷</a></li>
-<li><a class="reference internal" href="#gitrepo">10.3.2 gitRepo卷</a></li>
-<li><a class="reference internal" href="#emptydir">10.3.3 emptyDir缓存卷</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id54">10.4 网络存储</a><ul>
-<li><a class="reference internal" href="#nfs">10.4.1 nfs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id55">10.5 分布式存储</a><ul>
-<li><a class="reference internal" href="#persistentvolume">10.5.1 PersistentVolume</a></li>
-<li><a class="reference internal" href="#persistentvolumeclaim">10.5.2. PersistentVolumeClaim</a></li>
-<li><a class="reference internal" href="#storageclass">10.5.3 StorageClass</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#storageclass-ceph-rbd">10.6 StorageClass Ceph RBD</a><ul>
-<li><a class="reference internal" href="#ceph">10.6.1 配置 Ceph 储存池</a></li>
-<li><a class="reference internal" href="#rbd-provisioner">10.6.2 安装 rbd-provisioner</a></li>
-<li><a class="reference internal" href="#id56">10.6.3 使用 StorageClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pods-spec">6.2 pods.spec 规范</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nodename">6.2.1 nodeName 运行节点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nodeselector">6.2.2 nodeSelector 节点选择</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restartpolicy-pod">6.2.3 restartPolicy POD重启策略</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hostnetwork">6.2.4 hostNetwork 主机网络空间</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hostpid-pid">6.2.5 hostPID 主机PID空间</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#containers">6.2.6 containers 配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#imagepullpolicy">6.2.6.1 imagePullPolicy下载策略</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ports">6.2.6.2 ports 端口信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#env">6.2.6.3 env 传递环境变量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command-entrypoint">6.2.6.4 command ENTRYPOINT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#args-cmd">6.2.6.5 args CMD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#annotations">6.2.6.6 annotations 注解信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">6.2.6.7 POD 生命周期</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#livenessprobe">6.2.6.8 livenessProbe 存活性探测</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#readinessprobe">6.2.6.9 readinessProbe 就绪性检测</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lifecycle">6.2.6.10 lifecycle 生命周期钩子</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id57">十一 配置信息容器化</a><ul>
-<li><a class="reference internal" href="#id58">11.1 POD 获取环境变量</a></li>
-<li><a class="reference internal" href="#configmap">11.2 configMap</a><ul>
-<li><a class="reference internal" href="#pod-env">11.2.1 注入 POD ENV</a></li>
-<li><a class="reference internal" href="#id59">11.2.2 挂载为 POD 卷</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#secret">11.3 secret</a><ul>
-<li><a class="reference internal" href="#id60">11.3.1 私有仓库认证1</a></li>
-<li><a class="reference internal" href="#id61">11.3.2 私有仓库认证2</a></li>
-<li><a class="reference internal" href="#tls">11.3.3 创建 TLS 证书</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id31">七 控制器配置清单</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#replicaset">7.1 ReplicaSet 控制器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#replicaset-spec">7.1.1 replicaset.spec 规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">7.1.2 清单示例</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment">7.2 Deployment控制器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id33">7.2.1 replicaset.spec 对象规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">7.2.2 清单示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">7.2.3 关于更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">7.2.4 模拟金丝雀发布</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id38">7.2.5 更新策略</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">7.2.6 关于回滚</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#statefulset">十二 StatefulSet 控制器</a><ul>
-<li><a class="reference internal" href="#id62">12.1 清单格式</a></li>
-<li><a class="reference internal" href="#nfs-pv">12.2 创建 NFS PV</a></li>
-<li><a class="reference internal" href="#id63">12.3 创建 statefulSet</a></li>
-<li><a class="reference internal" href="#id64">12.4 扩容和升级</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id65">十三 用户认证系统</a><ul>
-<li><a class="reference internal" href="#id66">13.1 用户的类型</a></li>
-<li><a class="reference internal" href="#id67">13.2 POD如何连接集群</a></li>
-<li><a class="reference internal" href="#serviceaccount">13.3 serviceaccount 对象</a><ul>
-<li><a class="reference internal" href="#pod-serviceaccount">13.3.1 在 POD 中使用 serviceaccount</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id68">13.4 kubectl 配置文件</a></li>
-<li><a class="reference internal" href="#config">13.5 添加证书用户到 config</a><ul>
-<li><a class="reference internal" href="#ssl">13.5.1 创建SSL证书用户</a></li>
-<li><a class="reference internal" href="#sslconfig">13.5.2 添加SSL证书用户到config</a></li>
-<li><a class="reference internal" href="#id69">13.5.3 创建切换上下文</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id70">13.6 创建新 config 文件</a></li>
-<li><a class="reference internal" href="#token">13.7 基于 token 认证</a><ul>
-<li><a class="reference internal" href="#id71">13.7.1 创建 serviceaccount</a></li>
-<li><a class="reference internal" href="#id72">13.7.2 绑定集群管理员角色</a></li>
-<li><a class="reference internal" href="#serviceaccount-token">13.7.3 通过 serviceaccount 得到 Token</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#daemonset">7.3 DaemonSet控制器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#daemonset-spec">7.3.1 DaemonSet.spec规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id40">7.3.2 清单示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id42">7.3.3 关于更新</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id73">十四 用户权限系统</a><ul>
-<li><a class="reference internal" href="#id74">14.1 权限列表</a></li>
-<li><a class="reference internal" href="#role">14.2 创建 Role</a></li>
-<li><a class="reference internal" href="#rolebinding">14.3 创建 rolebinding</a></li>
-<li><a class="reference internal" href="#clusterrole">14.4 创建 clusterrole</a></li>
-<li><a class="reference internal" href="#clusterrolebinding">14.5 创建 clusterrolebinding</a></li>
-<li><a class="reference internal" href="#rolebinding-clusterrole">14.6 rolebinding 与 clusterrole</a></li>
-<li><a class="reference internal" href="#rbac">14.7 RBAC授权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id44">八 Service 配置清单</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id45">8.1 Service 工作模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id46">8.2 Service 类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id47">8.3 资源记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id48">8.4 Service 清单</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#service-spec">8.5 service.spec 规范</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clusterip-service">8.6 ClusterIP 类型的 service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nodeport-service">8.7 NodePort 类型的 service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loadbalancerip">8.8 loadBalancerIP 类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id49">8.9 无集群地址的 Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#externalname">8.10 externalName 类型</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dashboard">十五 dashboard</a><ul>
-<li><a class="reference internal" href="#id75">15.1 部署流程</a></li>
-<li><a class="reference internal" href="#id76">15.2 使用令牌登录</a></li>
-<li><a class="reference internal" href="#id77">15.3 分级管理</a></li>
-<li><a class="reference internal" href="#id78">15.4 配置文件认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ingress">九 ingress 控制器</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ingress-spec">9.1 ingress.spec 规范</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ingress-nginx">9.2 ingress-nginx 代理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ingress-tomcat">9.3 ingress-tomcat 代理</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id79">十六 网络通信</a><ul>
-<li><a class="reference internal" href="#id80">16.1 通信模型</a></li>
-<li><a class="reference internal" href="#id81">16.2 通信模型底层</a></li>
-<li><a class="reference internal" href="#id82">16.3 K8S 名称空间</a></li>
-<li><a class="reference internal" href="#id83">16.4 K8S网络拓扑</a></li>
-<li><a class="reference internal" href="#flannel">16.5 flannel</a><ul>
-<li><a class="reference internal" href="#id84">16.5.1 flannel 工作模式</a></li>
-<li><a class="reference internal" href="#vxlan">16.5.2 VXLAN 通信过程</a></li>
-<li><a class="reference internal" href="#id85">16.5.3 flannel 部署方式</a></li>
-<li><a class="reference internal" href="#id86">16.5.4flannel 配置文件</a></li>
-<li><a class="reference internal" href="#id87">16.5.5 修改工作模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id50">十 POD 存储卷</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id51">10.1 卷的类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id52">10.2 容器挂载选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id53">10.3 节点存储</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hostpath">10.3.1 hostpath存储卷</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gitrepo">10.3.2 gitRepo卷</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#emptydir">10.3.3 emptyDir缓存卷</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#calico">16.6 Calico</a><ul>
-<li><a class="reference internal" href="#canal">16.6.1 安装 canal</a></li>
-<li><a class="reference internal" href="#id88">16.6.2 清单定义</a></li>
-<li><a class="reference internal" href="#policytypes">16.6.3policyTypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id54">10.4 网络存储</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nfs">10.4.1 nfs</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#id55">10.5 分布式存储</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#persistentvolume">10.5.1 PersistentVolume</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#persistentvolumeclaim">10.5.2. PersistentVolumeClaim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storageclass">10.5.3 StorageClass</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id89">十七 调度策略</a><ul>
-<li><a class="reference internal" href="#id90">17.1 POD创建流程</a></li>
-<li><a class="reference internal" href="#id91">17.2 Service创建过程</a></li>
-<li><a class="reference internal" href="#id92">17.3 资源限制维度</a></li>
-<li><a class="reference internal" href="#scheduler">17.4 Scheduler 调度过程</a></li>
-<li><a class="reference internal" href="#id93">17.4 预选因素</a></li>
-<li><a class="reference internal" href="#id94">17.5 优选函数</a></li>
-<li><a class="reference internal" href="#id95">17.6 选择函数</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id96">十八 高级调度设置</a><ul>
-<li><a class="reference internal" href="#id97">18.1 节点选择器</a></li>
-<li><a class="reference internal" href="#id98">18.2 对节点的亲和性</a></li>
-<li><a class="reference internal" href="#id99">18.3 对 POD 的亲和性</a></li>
-<li><a class="reference internal" href="#id100">18.4 对 POD 的反亲和性</a></li>
-<li><a class="reference internal" href="#id101">18.5 node 污点</a></li>
-<li><a class="reference internal" href="#id102">18.6 POD 污点容忍</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id103">十九 容器资源限制</a><ul>
-<li><a class="reference internal" href="#id104">19.1 资源限制</a></li>
-<li><a class="reference internal" href="#qos">19.2 qos 质量管理</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#heapster">二十 HeapSter监控（废弃中）</a><ul>
-<li><a class="reference internal" href="#influx-db">20.1 安装 influx DB</a></li>
-<li><a class="reference internal" href="#id105">20.2 安装 HeapSter</a></li>
-<li><a class="reference internal" href="#grafana">20.3 安装 Grafana</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id106">二十一 新一代监控架构</a><ul>
-<li><a class="reference internal" href="#id107">21.1 核心指标流水线</a></li>
-<li><a class="reference internal" href="#id108">21.2监控流水线</a></li>
-<li><a class="reference internal" href="#metrics-server">21.3 安装 metrics-server</a></li>
-<li><a class="reference internal" href="#prometheus">21.4 安装 prometheus</a></li>
-<li><a class="reference internal" href="#hpa">21.5 HPA命令行方式</a></li>
-<li><a class="reference internal" href="#id109">21.6 HPA清单</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id110">二十二 K8S包管理器</a><ul>
-<li><a class="reference internal" href="#id111">22.1 基础概念</a></li>
-<li><a class="reference internal" href="#helm">22.2 Helm 工作原理</a></li>
-<li><a class="reference internal" href="#id112">22.3 部署 Helm</a></li>
-<li><a class="reference internal" href="#chart">22.4 Chart文件组织</a></li>
-<li><a class="reference internal" href="#helm-ceph-efk">22.5 使用 Helm + Ceph 部署 EFK</a></li>
-<li><a class="reference internal" href="#storage-class">22.6 Storage Class</a></li>
-<li><a class="reference internal" href="#helm-elasticsearch">22.7 Helm Elasticsearch</a></li>
-<li><a class="reference internal" href="#helm-fluentd-elasticsearch">22.8 Helm fluentd-elasticsearch</a></li>
-<li><a class="reference internal" href="#helm-kibana">22.9 Helm kibana</a></li>
-<li><a class="reference internal" href="#id113">参考链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#storageclass-ceph-rbd">10.6 StorageClass Ceph RBD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceph">10.6.1 配置 Ceph 储存池</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rbd-provisioner">10.6.2 安装 rbd-provisioner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id56">10.6.3 使用 StorageClass</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id57">十一 配置信息容器化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id58">11.1 POD 获取环境变量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configmap">11.2 configMap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pod-env">11.2.1 注入 POD ENV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id59">11.2.2 挂载为 POD 卷</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#secret">11.3 secret</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id60">11.3.1 私有仓库认证1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id61">11.3.2 私有仓库认证2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tls">11.3.3 创建 TLS 证书</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#statefulset">十二 StatefulSet 控制器</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id62">12.1 清单格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nfs-pv">12.2 创建 NFS PV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id63">12.3 创建 statefulSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id64">12.4 扩容和升级</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id65">十三 用户认证系统</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id66">13.1 用户的类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id67">13.2 POD如何连接集群</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#serviceaccount">13.3 serviceaccount 对象</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pod-serviceaccount">13.3.1 在 POD 中使用 serviceaccount</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id68">13.4 kubectl 配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config">13.5 添加证书用户到 config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ssl">13.5.1 创建SSL证书用户</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sslconfig">13.5.2 添加SSL证书用户到config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id69">13.5.3 创建切换上下文</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id70">13.6 创建新 config 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#token">13.7 基于 token 认证</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id71">13.7.1 创建 serviceaccount</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id72">13.7.2 绑定集群管理员角色</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serviceaccount-token">13.7.3 通过 serviceaccount 得到 Token</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id73">十四 用户权限系统</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id74">14.1 权限列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#role">14.2 创建 Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rolebinding">14.3 创建 rolebinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clusterrole">14.4 创建 clusterrole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clusterrolebinding">14.5 创建 clusterrolebinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rolebinding-clusterrole">14.6 rolebinding 与 clusterrole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rbac">14.7 RBAC授权</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#dashboard">十五 dashboard</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id75">15.1 部署流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id76">15.2 使用令牌登录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id77">15.3 分级管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id78">15.4 配置文件认证</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id79">十六 网络通信</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id80">16.1 通信模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id81">16.2 通信模型底层</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id82">16.3 K8S 名称空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id83">16.4 K8S网络拓扑</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flannel">16.5 flannel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id84">16.5.1 flannel 工作模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vxlan">16.5.2 VXLAN 通信过程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id85">16.5.3 flannel 部署方式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id86">16.5.4flannel 配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id87">16.5.5 修改工作模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calico">16.6 Calico</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#canal">16.6.1 安装 canal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id88">16.6.2 清单定义</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#policytypes">16.6.3policyTypes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id89">十七 调度策略</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id90">17.1 POD创建流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id91">17.2 Service创建过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id92">17.3 资源限制维度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheduler">17.4 Scheduler 调度过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id93">17.4 预选因素</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id94">17.5 优选函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id95">17.6 选择函数</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id96">十八 高级调度设置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id97">18.1 节点选择器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id98">18.2 对节点的亲和性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id99">18.3 对 POD 的亲和性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id100">18.4 对 POD 的反亲和性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id101">18.5 node 污点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id102">18.6 POD 污点容忍</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id103">十九 容器资源限制</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id104">19.1 资源限制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qos">19.2 qos 质量管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#heapster">二十 HeapSter监控（废弃中）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#influx-db">20.1 安装 influx DB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id105">20.2 安装 HeapSter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grafana">20.3 安装 Grafana</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id106">二十一 新一代监控架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id107">21.1 核心指标流水线</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id108">21.2监控流水线</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metrics-server">21.3 安装 metrics-server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prometheus">21.4 安装 prometheus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hpa">21.5 HPA命令行方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id109">21.6 HPA清单</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id110">二十二 K8S包管理器</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id111">22.1 基础概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helm">22.2 Helm 工作原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id112">22.3 部署 Helm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chart">22.4 Chart文件组织</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helm-ceph-efk">22.5 使用 Helm + Ceph 部署 EFK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#storage-class">22.6 Storage Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helm-elasticsearch">22.7 Helm Elasticsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helm-fluentd-elasticsearch">22.8 Helm fluentd-elasticsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helm-kibana">22.9 Helm kibana</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id113">参考链接</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -397,7 +398,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">KaliArch's Kubernetes-Note</a>
+          <a href="index.html">KaliArch's awesome-kubernetes-notes</a>
         
       </nav>
 
@@ -7586,6 +7587,13 @@ Landscape</a> ### 视频</p></li>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to kaliarch kubernetes-note’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

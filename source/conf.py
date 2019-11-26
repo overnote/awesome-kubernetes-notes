@@ -43,7 +43,7 @@ source_suffix = ['.rst','.md']
 master_doc = 'index'
 
 # General information about the project.
-project = u'KaliArch\'s Kubernetes-Note'
+project = u'KaliArch\'s awesome-kubernetes-notes'
 copyright = u'2019, kaliarch'
 
 # The version info for the project you're documenting, acts as replacement for

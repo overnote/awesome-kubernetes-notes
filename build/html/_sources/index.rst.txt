@@ -7,10 +7,10 @@ Welcome to kaliarch kubernetes-note's documentation!
 ====================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
-   Kubernetes-note
+   awesome-kubernetes-notes
 
 
 Indices and tables
