@@ -1,12 +1,15 @@
 # awesome-kubernetes-notes
 ---
+[![Documentation Status](https://readthedocs.org/projects/awesome-kubernetes-notes/badge/?version=latest)](https://awesome-kubernetes-notes.readthedocs.io/en/latest/?badge=latest) 
 
-> 本文 [awesome-kubernetes-notes](https://github.com/redhatxl/awesome-kubernetes-notes)
-> 
-> 个人信息：
-> - [GitHub](https://github.com/redhatxl)
-> - [掘金](https://juejin.im/user/5c36033fe51d456e4138b473/posts)
-> - [慕课网](https://www.imooc.com/u/1260704)
+# 目的
+为方便更多k8s爱好者更系统性的学习文档，利用`sphinx`将笔记整理构建程在线文档，方便学习交流
+本文 [awesome-kubernetes-notes](https://github.com/redhatxl/awesome-kubernetes-notes)
+
+个人信息：
+- [GitHub](https://github.com/redhatxl)
+- [掘金](https://juejin.im/user/5c36033fe51d456e4138b473/posts)
+- [慕课网](https://www.imooc.com/u/1260704)
 
 > awesome-kubernetes-notes：[在线阅读](https://awesome-kubernetes-notes.readthedocs.io/en/latest/)
 
