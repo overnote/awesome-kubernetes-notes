@@ -6372,14 +6372,19 @@ kubernetes                     ClusterIP   10.96.0.1       <none>        443/TCP
 * [python微服务实战](https://www.qikqiak.com/tdd-book/)
 * [云原生之路](https://jimmysong.io/kubernetes-handbook/cloud-native/from-kubernetes-to-cloud-native.html)
 * [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/)
+
 ### 视频
+
 * [马哥(docker容器技术+k8s集群技术)](https://www.bilibili.com/video/av35847195/?p=16&t=3931)
 * [微服务容器化实战](https://www.acfun.cn/v/ac10232871)
 
 ---
 如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流👏
+
 ### 请我喝咖啡☕️
+
 * 微信
 ![微信](https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/weixin.png)
+
 * 支付宝
 ![支付宝](https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/zfb.png)
