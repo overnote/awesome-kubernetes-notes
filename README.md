@@ -1,11 +1,10 @@
 # awesome-kubernetes-notes
 
----
-
-[![Documentation Status](https://readthedocs.org/projects/awesome-kubernetes-notes/badge/?version=latest)](https://awesome-kubernetes-notes.readthedocs.io/en/latest/?badge=latest) 
+[![Documentation Status](https://readthedocs.org/projects/awesome-kubernetes-notes/badge/?version=latest)](https://awesome-kubernetes-notes.readthedocs.io/en/latest/?badge=latest)
 
 # 目的
 为方便更多k8s爱好者更系统性的学习文档，利用`sphinx`将笔记整理构建程在线文档，方便学习交流
+
 本文 [awesome-kubernetes-notes](https://github.com/redhatxl/awesome-kubernetes-notes)
 
 个人信息：
