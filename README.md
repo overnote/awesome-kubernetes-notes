@@ -14,7 +14,6 @@
 
 > awesome-kubernetes-notes：[在线阅读](https://awesome-kubernetes-notes.readthedocs.io/en/latest/)
 
----
 
 # 目录
 
