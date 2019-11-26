@@ -14,6 +14,9 @@
 
 > awesome-kubernetes-notes：[在线阅读](https://awesome-kubernetes-notes.readthedocs.io/en/latest/)
 
+# demo
+
+![](https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/demo.png)
 
 # 目录
 
