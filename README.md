@@ -1,6 +1,6 @@
 # awesome-kubernetes-notes
 
-[![Documentation Status](https://readthedocs.org/projects/awesome-kubernetes-notes/badge/?version=latest)](https://awesome-kubernetes-notes.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/awesome-kubernetes-notes/badge/?version=latest)](https://awesome-kubernetes-notes.readthedocs.io/en/latest/?badge=latest)![](https://img.shields.io/badge/sphinx-python-blue.svg)![](https://img.shields.io/badge/python-3.6-green.svg)
 
 # 目的
 为方便更多k8s爱好者更系统性的学习文档，利用`sphinx`将笔记整理构建程在线文档，方便学习交流
