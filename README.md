@@ -169,8 +169,6 @@
 
 
     
----
-    
 ## 学习链接
 #### 文档
 * [Kubernetes官网教程](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
@@ -190,7 +188,15 @@
 * [马哥(docker容器技术+k8s集群技术)](https://www.bilibili.com/video/av35847195/?p=16&t=3931)
 * [微服务容器化实战](https://www.acfun.cn/v/ac10232871)
 
----
+
+## TODO
+
+[] 告警配置发送
+[] 日志收集
+[] CI/CD的DevOPS相关
+[] [国产KubeSphere相关](https://kubesphere.io/zh-CN/)
+
+
 如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流🎉
 
 扫一扫请我喝咖啡☕️
