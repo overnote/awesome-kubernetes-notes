@@ -191,10 +191,10 @@
 
 ## TODO
 
-[] 告警配置发送
-[] 日志收集
-[] CI/CD的DevOPS相关
-[] [国产KubeSphere相关](https://kubesphere.io/zh-CN/)
+- [] 告警配置发送
+- [] 日志收集
+- [] CI/CD的DevOPS相关
+- [] [国产容器管理平台KubeSphere](https://kubesphere.io/zh-CN/)
 
 
 如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流🎉
