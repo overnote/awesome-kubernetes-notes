@@ -1,0 +1,14 @@
+sudo: false
+language: python
+
+python:
+  - "2.7"
+
+install:
+    - pip install sphinx sphinx-autobuild sphinx_rtd_theme
+
+script:
+    - make html
+    - uname -a
+    - which wget
+    - ls
