@@ -166,6 +166,21 @@
   - 22.7 Helm Elasticsearch
   - 22.8 Helm fluentd-elasticsearch
   - 22.9 Helm kibana
+* ## [二十三 ETCD详解]()
+  - 23.1 ETCD概述
+  - 23.2 ETCD架构及解析
+  - 23.3 应用场景
+  - 23.4 安装部署
+  - 23.5 简单使用
+* ## [二十四 国产容器管理平台KubeSphere实战排错]()
+  - 24.1 清理退出状态的容器
+  - 24.2 清理异常或被驱逐的 pod
+  - 24.3 Docker 数据迁移
+  - 24.4 kubesphere 网络排错
+  - 24.5 kubesphere 应用路由异常
+  - 24.6 Jenkins 的 Agent
+  - 24.7 Devops 中 Mail的发送
+  
 
 
     
@@ -191,10 +206,11 @@
 
 ## TODO
 
+- [x] ETCD详解
 - [ ] 告警配置发送
 - [ ] 日志收集
 - [ ] CI/CD的DevOPS相关
-- [ ] [国产容器管理平台KubeSphere](https://kubesphere.io/zh-CN/)
+- [x] [国产容器管理平台KubeSphere实战排错](https://kubesphere.io/zh-CN/)
 
 ---
 
