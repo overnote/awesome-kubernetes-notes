@@ -7955,37 +7955,37 @@ etcd-0-14配置：
 
 在集群运行一段时间后，有些container由于异常状态退出Exited，需要去及时清理释放磁盘，可以将其设置成定时任务执行
 
-::
+.. code:: bash
 
-   docker rm `docker ps -a |grep Exited |awk '{print $1}'`
+   docker rm `docker ps -a | grep Exited |awk '{print $1}'`
 
 24.2 清理异常或被驱逐的 pod
 ---------------------------
 
 -  清理kubesphere-devops-system的ns下清理
 
-::
+.. code:: bash
 
-   kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system |grep Evicted|awk '{print $1}')
-   kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system |grep CrashLoopBackOff|awk '{print $1}')
+   kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system | grep Evicted |awk '{print $1}')
+   kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system | grep CrashLoopBackOff |awk '{print $1}')
 
 -  为方便清理指定ns清理evicted/crashloopbackoff的pod/清理exited的容器
 
-::
+.. code:: bash
 
    #!/bin/bash
    # auth:kaliarch
 
    clear_evicted_pod() {
      ns=$1
-     kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep Evicted|awk '{print $1}')
+     kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep Evicted |awk '{print $1}')
    }
    clear_crash_pod() {
      ns=$1
-     kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep CrashLoopBackOff|awk '{print $1}')
+     kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep CrashLoopBackOff |awk '{print $1}')
    }
    clear_exited_container() {
-     docker rm `docker ps -a |grep Exited |awk '{print $1}'`
+     docker rm `docker ps -a | grep Exited |awk '{print $1}'`
    }
 
 
@@ -8016,15 +8016,15 @@ etcd-0-14配置：
 
 -  清理全部ns中evicted/crashloopbackoff的pod
 
-::
+.. code:: bash
 
    # 获取所有ns
-   kubectl get ns|grep -v "NAME"|awk '{print $1}'
+   kubectl get ns | grep -v "NAME" |awk '{print $1}'
 
    # 清理驱逐状态的pod
-   for ns in `kubectl get ns|grep -v "NAME"|awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep Evicted|awk '{print $1}');done
+   for ns in `kubectl get ns | grep -v "NAME" | awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep "Evicted" |awk '{print $1}');done
    # 清理异常pod
-   for ns in `kubectl get ns|grep -v "NAME"|awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep CrashLoopBackOff|awk '{print $1}');done
+   for ns in `kubectl get ns | grep -v "NAME" | awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep "CrashLoopBackOff" |awk '{print $1}');done
 
 24.3 Docker 数据迁移
 --------------------
@@ -8032,7 +8032,7 @@ etcd-0-14配置：
 在安装过程中未指定docker数据目录，系统盘50G，随着时间推移磁盘不够用，需要迁移docker数据，使用软连接方式：
 首选挂载新磁盘到/data目录
 
-::
+.. code:: bash
 
    systemctl stop docker
 
@@ -8058,7 +8058,6 @@ etcd-0-14配置：
 查看手动启动的容器网络上走的docker0
 
 ::
-
 
    root@fd1b8101475d:/# ip a
 
@@ -8116,7 +8115,7 @@ etcd-0-14配置：
 修改文件/etc/systemd/system/docker.service.d/docker-options.conf中去掉参数：–iptables=false
 这个参数等于false时会不写iptables
 
-::
+.. code:: bash
 
    [Service]
    Environment="DOCKER_OPTS=  --registry-mirror=https://registry.docker-cn.com --data-root=/var/lib/docker --log-opt max-size=10m --log-opt max-file=3 --insecure-registry=harbor.devops.kubesphere.local:30280"
@@ -8130,7 +8129,7 @@ etcd-0-14配置：
 
 |image12|
 
-::
+.. code:: yaml
 
    kind: Ingress
    apiVersion: extensions/v1beta1
@@ -8230,9 +8229,9 @@ https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB
 |                                   | “foo/bar”. (To strip off folder   |
 |                                   | paths from a Bourne shell script, |
 |                                   | try:                              |
-|                                   | :math:`{JOB_NAME##*/}) | | BUILD_ |
-|                                   | TAG | String of "jenkins-`\ {JOB_ |
-|                                   | NAME}-${BUILD_NUMBER}".           |
+|                                   | :math:`{JOB_NAME}) | | BUILD_TAG  |
+|                                   | | String of "jenkins-`\ {JOB_NAME |
+|                                   | }-${BUILD_NUMBER}".               |
 |                                   | Convenient to put into a resource |
 |                                   | file, a jar file, etc for easier  |
 |                                   | identification.                   |
@@ -8289,7 +8288,7 @@ https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB
 
 最终自己写了适应自己业务的模版，可以直接使用
 
-::
+.. code:: bash
 
    mail to: 'xuel@net.com',
              charset:'UTF-8', // or GBK/GB18030

@@ -7268,35 +7268,36 @@ Snapshot saved at mysnapshot.db
 ## 24.1 清理退出状态的容器
 
 在集群运行一段时间后，有些container由于异常状态退出Exited，需要去及时清理释放磁盘，可以将其设置成定时任务执行
-```
-docker rm `docker ps -a |grep Exited |awk '{print $1}'`
+
+```bash
+docker rm `docker ps -a | grep Exited |awk '{print $1}'`
 ```
 
 ## 24.2 清理异常或被驱逐的 pod
 
 * 清理kubesphere-devops-system的ns下清理
 
-```
-kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system |grep Evicted|awk '{print $1}')
-kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system |grep CrashLoopBackOff|awk '{print $1}')
+```bash
+kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system | grep Evicted |awk '{print $1}')
+kubectl delete pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system | grep CrashLoopBackOff |awk '{print $1}')
 ```
 
 * 为方便清理指定ns清理evicted/crashloopbackoff的pod/清理exited的容器
 
-```
+```bash
 #!/bin/bash
 # auth:kaliarch
 
 clear_evicted_pod() {
   ns=$1
-  kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep Evicted|awk '{print $1}')
+  kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep Evicted |awk '{print $1}')
 }
 clear_crash_pod() {
   ns=$1
-  kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep CrashLoopBackOff|awk '{print $1}')
+  kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep CrashLoopBackOff |awk '{print $1}')
 }
 clear_exited_container() {
-  docker rm `docker ps -a |grep Exited |awk '{print $1}'`
+  docker rm `docker ps -a | grep Exited |awk '{print $1}'`
 }
 
 
@@ -7328,14 +7329,14 @@ esac
 
 * 清理全部ns中evicted/crashloopbackoff的pod
 
-```
+```bash
 # 获取所有ns
-kubectl get ns|grep -v "NAME"|awk '{print $1}'
+kubectl get ns | grep -v "NAME" |awk '{print $1}'
 
 # 清理驱逐状态的pod
-for ns in `kubectl get ns|grep -v "NAME"|awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep Evicted|awk '{print $1}');done
+for ns in `kubectl get ns | grep -v "NAME" | awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep "Evicted" |awk '{print $1}');done
 # 清理异常pod
-for ns in `kubectl get ns|grep -v "NAME"|awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} |grep CrashLoopBackOff|awk '{print $1}');done
+for ns in `kubectl get ns | grep -v "NAME" | awk '{print $1}'`;do kubectl delete pods -n ${ns} $(kubectl get pods -n ${ns} | grep "CrashLoopBackOff" |awk '{print $1}');done
 ```
 
 ## 24.3 Docker 数据迁移
@@ -7343,7 +7344,7 @@ for ns in `kubectl get ns|grep -v "NAME"|awk '{print $1}'`;do kubectl delete pod
 在安装过程中未指定docker数据目录，系统盘50G，随着时间推移磁盘不够用，需要迁移docker数据，使用软连接方式：
 首选挂载新磁盘到/data目录
 
-```
+```bash
 systemctl stop docker
 
 mkdir -p /data/docker/  
@@ -7368,7 +7369,6 @@ systemctl start docker
 查看手动启动的容器网络上走的docker0
 
 ```
-
 root@fd1b8101475d:/# ip a
 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
@@ -7425,7 +7425,7 @@ root@fd1b8101475d:/# ip a
 
 修改文件/etc/systemd/system/docker.service.d/docker-options.conf中去掉参数：--iptables=false  这个参数等于false时会不写iptables
 
-```
+```bash
 [Service]
 Environment="DOCKER_OPTS=  --registry-mirror=https://registry.docker-cn.com --data-root=/var/lib/docker --log-opt max-size=10m --log-opt max-file=3 --insecure-registry=harbor.devops.kubesphere.local:30280"
 ```
@@ -7438,7 +7438,7 @@ Environment="DOCKER_OPTS=  --registry-mirror=https://registry.docker-cn.com --da
 
 ![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/2.jpeg)
 
-```
+```yaml
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
@@ -7520,7 +7520,7 @@ jenkins中更新base镜像
 | BUILD_NUMBER   | The current build number, such as "153"   |
 | BUILD_ID   | The current build ID, identical to BUILD_NUMBER for builds created in 1.597+, but a YYYY-MM-DD_hh-mm-ss timestamp for older builds   |
 | BUILD_DISPLAY_NAME   | The display name of the current build, which is something like "#153" by default.   |
-| JOB_NAME   | Name of the project of this build, such as "foo" or "foo/bar". (To strip off folder paths from a Bourne shell script, try: ${JOB_NAME##*/})   |
+| JOB_NAME   | Name of the project of this build, such as "foo" or "foo/bar". (To strip off folder paths from a Bourne shell script, try: ${JOB_NAME})   |
 | BUILD_TAG   | String of "jenkins-${JOB_NAME}-${BUILD_NUMBER}". Convenient to put into a resource file, a jar file, etc for easier identification.   |
 | EXECUTOR_NUMBER   | The unique number that identifies the current executor (among executors of the same machine) that’s carrying out this build. This is the number you see in the "build executor status", except that the number starts from 0, not 1.   |
 | NODE_NAME   | Name of the slave if the build is on a slave, or "master" if run on master   |
@@ -7535,7 +7535,7 @@ jenkins中更新base镜像
 
 最终自己写了适应自己业务的模版，可以直接使用
 
-```
+```bash
 mail to: 'xuel@net.com',
           charset:'UTF-8', // or GBK/GB18030
           mimeType:'text/plain', // or text/html
