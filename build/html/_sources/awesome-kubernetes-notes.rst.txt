@@ -8195,7 +8195,9 @@ agent 都是一个Pod，如果要替换内置的agent，就需要替换 agent �
 
 https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB%E9%99%86-jenkins-%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD
 
-|image15| jenkins中更新base镜像
+|image15|
+
+jenkins中更新base镜像
 
 |image16|
 
@@ -8345,24 +8347,24 @@ https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB
 
 -  支付宝 |支付宝|
 
-.. |image0| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/1.png
-.. |image1| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/2.png
-.. |image2| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/3.png
-.. |image3| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/4.png
-.. |image4| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/5.png
-.. |image5| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/6.png
-.. |image6| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/7.png
-.. |image7| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/8.png
-.. |image8| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/9.png
-.. |image9| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/10.png
-.. |image10| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/11.png
-.. |image11| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/1.jpeg
-.. |image12| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/2.jpeg
-.. |image13| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/3.jpeg
-.. |image14| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/4.jpeg
-.. |image15| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/5.jpeg
-.. |image16| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/6.jpeg
-.. |image17| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/7.jpeg
-.. |image18| image:: https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/8.jpeg
+.. |image0| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/1.png
+.. |image1| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/2.png
+.. |image2| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/3.png
+.. |image3| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/4.png
+.. |image4| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/5.png
+.. |image5| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/6.png
+.. |image6| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/7.png
+.. |image7| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/8.png
+.. |image8| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/9.png
+.. |image9| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/10.png
+.. |image10| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/11.png
+.. |image11| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/1.jpeg
+.. |image12| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/2.jpeg
+.. |image13| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/3.jpeg
+.. |image14| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/4.jpeg
+.. |image15| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/5.jpeg
+.. |image16| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/6.jpeg
+.. |image17| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/7.jpeg
+.. |image18| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/8.jpeg
 .. |微信| image:: https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/weixin.png
 .. |支付宝| image:: https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/zfb.png

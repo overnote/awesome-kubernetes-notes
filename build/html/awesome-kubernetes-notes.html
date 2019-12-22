@@ -7759,7 +7759,7 @@ kubernetes                     ClusterIP   <span class="m">10</span>.96.0.1     
 </div>
 <div class="section" id="id116">
 <h3><a class="toc-backref" href="#id360">23.1.2 发展历史</a><a class="headerlink" href="#id116" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image0" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/1.png" /></p>
+<p><img alt="image0" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/1.png" /></p>
 </div>
 <div class="section" id="id117">
 <h3><a class="toc-backref" href="#id361">23.1.3 ETCD特点</a><a class="headerlink" href="#id117" title="Permalink to this headline">¶</a></h3>
@@ -7820,7 +7820,7 @@ kubernetes                     ClusterIP   <span class="m">10</span>.96.0.1     
 <h2><a class="toc-backref" href="#id364">23.2 ETCD架构及解析</a><a class="headerlink" href="#id122" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id123">
 <h3><a class="toc-backref" href="#id365">23.2.1 架构图</a><a class="headerlink" href="#id123" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image1" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/2.png" /></p>
+<p><img alt="image1" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/2.png" /></p>
 </div>
 <div class="section" id="id124">
 <h3><a class="toc-backref" href="#id366">23.2.2 架构解析</a><a class="headerlink" href="#id124" title="Permalink to this headline">¶</a></h3>
@@ -7854,27 +7854,27 @@ etcd 对用户提供的大多数 API 功能的具体实现。</p></li>
 <ul class="simple">
 <li><p>前后端业务注册发现</p></li>
 </ul>
-<p><img alt="image2" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/3.png" /></p>
+<p><img alt="image2" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/3.png" /></p>
 <p>中间价已经后端服务在etcd中注册，前端和中间价可以很轻松的从etcd中发现相关服务器然后服务器之间根据调用关系相关绑定调用</p>
 <ul class="simple">
 <li><p>多组后端服务器注册发现</p></li>
 </ul>
-<p><img alt="image3" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/4.png" /></p>
+<p><img alt="image3" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/4.png" /></p>
 <p>后端多个无状态相同副本的app可以同事注册到etcd中，前端可以通过haproxy从etcd中获取到后端的ip和端口组，然后进行请求转发，可以用来故障转移屏蔽后端端口已经后端多组app实例。</p>
 </div>
 <div class="section" id="id127">
 <h3><a class="toc-backref" href="#id369">23.3.2 消息发布与订阅</a><a class="headerlink" href="#id127" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image4" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/5.png" /></p>
+<p><img alt="image4" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/5.png" /></p>
 <p>etcd可以充当消息中间件，生产者可以往etcd中注册topic并发送消息，消费者从etcd中订阅topic，来获取生产者发送至etcd中的消息。</p>
 </div>
 <div class="section" id="id128">
 <h3><a class="toc-backref" href="#id370">23.3.3 负载均衡</a><a class="headerlink" href="#id128" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image5" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/6.png" /></p>
+<p><img alt="image5" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/6.png" /></p>
 <p>后端多组相同的服务提供者可以经自己服务注册到etcd中，etcd并且会与注册的服务进行监控检查，服务请求这首先从etcd中获取到可用的服务提供者真正的ip:port，然后对此多组服务发送请求，etcd在其中充当了负载均衡的功能</p>
 </div>
 <div class="section" id="id129">
 <h3><a class="toc-backref" href="#id371">23.3.4 分布式通知与协调</a><a class="headerlink" href="#id129" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image6" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/7.png" /></p>
+<p><img alt="image6" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/7.png" /></p>
 <ul class="simple">
 <li><p>当etcd watch服务发现丢失，会通知服务检查</p></li>
 <li><p>控制器向etcd发送启动服务，etcd通知服务进行相应操作</p></li>
@@ -7883,17 +7883,17 @@ etcd 对用户提供的大多数 API 功能的具体实现。</p></li>
 </div>
 <div class="section" id="id130">
 <h3><a class="toc-backref" href="#id372">23.3.5 分布式锁</a><a class="headerlink" href="#id130" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image7" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/8.png" /></p>
+<p><img alt="image7" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/8.png" /></p>
 <p>当有多个竞争者node节点，etcd作为总控，在分布式集群中与一个节点成功分配lock</p>
 </div>
 <div class="section" id="id131">
 <h3><a class="toc-backref" href="#id373">23.3.6 分布式队列</a><a class="headerlink" href="#id131" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image8" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/9.png" /></p>
+<p><img alt="image8" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/9.png" /></p>
 <p>有对个node，etcd根据每个node来创建对应node的队列，根据不同的队列可以在etcd中找到对应的competitor</p>
 </div>
 <div class="section" id="id132">
 <h3><a class="toc-backref" href="#id374">23.3.7 集群及爱你与Leader选举</a><a class="headerlink" href="#id132" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image9" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/10.png" /></p>
+<p><img alt="image9" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/10.png" /></p>
 <p>etcd可以根据raft算法在多个node节点来选举出leader</p>
 </div>
 </div>
@@ -7938,7 +7938,7 @@ systemctl <span class="nb">enable</span> etcd
 <h3><a class="toc-backref" href="#id377">23.4.2 集群部署</a><a class="headerlink" href="#id135" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id136">
 <h4>23.4.2.1 主机信息<a class="headerlink" href="#id136" title="Permalink to this headline">¶</a></h4>
-<p><img alt="image10" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/11.png" /></p>
+<p><img alt="image10" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/11.png" /></p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -8739,7 +8739,7 @@ systemctl start docker
 <li><p>解决方案：</p></li>
 </ul>
 <p>查看docker启动配置</p>
-<p><img alt="image11" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/1.jpeg" /></p>
+<p><img alt="image11" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/1.jpeg" /></p>
 <p>修改文件/etc/systemd/system/docker.service.d/docker-options.conf中去掉参数：–iptables=false
 这个参数等于false时会不写iptables</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Service<span class="o">]</span>
@@ -8751,7 +8751,7 @@ systemctl start docker
 <h2><a class="toc-backref" href="#id392">24.5 kubesphere 应用路由异常</a><a class="headerlink" href="#id150" title="Permalink to this headline">¶</a></h2>
 <p>在kubesphere中应用路由ingress使用的是nginx，在web界面配置会导致两个host使用同一个ca证书，可以通过注释文件配置</p>
 <p>⚠️注意：ingress控制deployment在：</p>
-<p><img alt="image12" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/2.jpeg" /></p>
+<p><img alt="image12" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/2.jpeg" /></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">metadata</span><span class="p">:</span>
@@ -8803,13 +8803,14 @@ agent 都是一个Pod，如果要替换内置的agent，就需要替换 agent �
 <p>构建最新 kubesphere/builder-base:advanced-1.0.0 版本的 agent 镜像</p>
 <p>更新为指定的自定义镜像：ccr.ccs.tencentyun.com/testns/base:v1</p>
 <p>参考链接：<a class="reference external" href="https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/devops-admin-faq/#%E5%8D%87%E7%BA%A7-jenkins-agent-%E7%9A%84%E5%8C%85%E7%89%88%E6%9C%AC">https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/devops-admin-faq/#%E5%8D%87%E7%BA%A7-jenkins-agent-%E7%9A%84%E5%8C%85%E7%89%88%E6%9C%AC</a></p>
-<p><img alt="image13" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/3.jpeg" /> <img alt="image14" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/4.jpeg" /></p>
+<p><img alt="image13" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/3.jpeg" /> <img alt="image14" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/4.jpeg" /></p>
 <p>在 KubeSphere 修改 jenkins-casc-config 以后，您需要在 Jenkins Dashboard
 系统管理下的 configuration-as-code 页面重新加载您更新过的系统配置。</p>
 <p>参考：</p>
 <p><a class="reference external" href="https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB%E9%99%86-jenkins-%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD">https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB%E9%99%86-jenkins-%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD</a></p>
-<p><img alt="image15" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/5.jpeg" /> jenkins中更新base镜像</p>
-<p><img alt="image16" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/6.jpeg" /></p>
+<p><img alt="image15" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/5.jpeg" /></p>
+<p>jenkins中更新base镜像</p>
+<p><img alt="image16" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/6.jpeg" /></p>
 <p>⚠️先修改kubesphere中jenkins的配置，<a class="reference external" href="http://xxxxxxxxx:30800/system-workspace/projects/kubesphere-devops-system/configmaps/jenkins-casc-config">jenkins-casc-config</a></p>
 </div>
 <div class="section" id="devops-mail">
@@ -8932,8 +8933,8 @@ oo/</a>
 <span class="s2">          构建URL : </span><span class="si">${</span><span class="nv">env</span><span class="p">.BUILD_URL</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<p><img alt="image17" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/7.jpeg" /></p>
-<p><img alt="image18" src="https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/8.jpeg" /></p>
+<p><img alt="image17" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/7.jpeg" /></p>
+<p><img alt="image18" src="https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/8.jpeg" /></p>
 </div>
 <div class="section" id="id151">
 <h2><a class="toc-backref" href="#id395">参考链接</a><a class="headerlink" href="#id151" title="Permalink to this headline">¶</a></h2>

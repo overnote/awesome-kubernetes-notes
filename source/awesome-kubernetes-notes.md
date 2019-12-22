@@ -6419,7 +6419,7 @@ etcd是CoreOS团队于2013年6月发起的开源项目，它的目标是构建�
 
 ### 23.1.2 发展历史
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/1.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/1.png)
 
 ### 23.1.3 ETCD特点
 
@@ -6485,7 +6485,7 @@ etcd认为写入请求被Leader节点处理并分发给了多数节点后，就�
 
 ### 23.2.1 架构图
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/2.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/2.png)
 
 ### 23.2.2 架构解析
 
@@ -6506,32 +6506,32 @@ etcd认为写入请求被Leader节点处理并分发给了多数节点后，就�
 
 * 前后端业务注册发现
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/3.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/3.png)
 
 中间价已经后端服务在etcd中注册，前端和中间价可以很轻松的从etcd中发现相关服务器然后服务器之间根据调用关系相关绑定调用
 
 * 多组后端服务器注册发现
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/4.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/4.png)
 
 后端多个无状态相同副本的app可以同事注册到etcd中，前端可以通过haproxy从etcd中获取到后端的ip和端口组，然后进行请求转发，可以用来故障转移屏蔽后端端口已经后端多组app实例。
 
 
 ### 23.3.2 消息发布与订阅
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/5.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/5.png)
 
 etcd可以充当消息中间件，生产者可以往etcd中注册topic并发送消息，消费者从etcd中订阅topic，来获取生产者发送至etcd中的消息。
 
 ### 23.3.3 负载均衡
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/6.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/6.png)
 
 后端多组相同的服务提供者可以经自己服务注册到etcd中，etcd并且会与注册的服务进行监控检查，服务请求这首先从etcd中获取到可用的服务提供者真正的ip:port，然后对此多组服务发送请求，etcd在其中充当了负载均衡的功能
 
 ### 23.3.4 分布式通知与协调
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/7.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/7.png)
 
 * 当etcd watch服务发现丢失，会通知服务检查
 * 控制器向etcd发送启动服务，etcd通知服务进行相应操作
@@ -6539,19 +6539,19 @@ etcd可以充当消息中间件，生产者可以往etcd中注册topic并发送�
 
 ### 23.3.5 分布式锁
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/8.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/8.png)
 
 当有多个竞争者node节点，etcd作为总控，在分布式集群中与一个节点成功分配lock
 
 ### 23.3.6 分布式队列
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/9.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/9.png)
 
 有对个node，etcd根据每个node来创建对应node的队列，根据不同的队列可以在etcd中找到对应的competitor
 
 ### 23.3.7 集群及爱你与Leader选举
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/10.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/10.png)
 
 etcd可以根据raft算法在多个node节点来选举出leader
 
@@ -6595,7 +6595,7 @@ ETCD_ADVERTISE_CLIENT_URLS="http://localhost:2379"
 
 #### 23.4.2.1 主机信息
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/etcd/11.png)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/11.png)
 
 | 主机名称  | 系统       | IP地址      | 部署组件 |
 | --------- | ---------- | ----------- | -------- |
@@ -7421,7 +7421,7 @@ root@fd1b8101475d:/# ip a
 
 查看docker启动配置
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/1.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/1.jpeg)
 
 修改文件/etc/systemd/system/docker.service.d/docker-options.conf中去掉参数：--iptables=false  这个参数等于false时会不写iptables
 
@@ -7436,7 +7436,7 @@ Environment="DOCKER_OPTS=  --registry-mirror=https://registry.docker-cn.com --da
 
 ⚠️注意：ingress控制deployment在：
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/2.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/2.jpeg)
 
 ```yaml
 kind: Ingress
@@ -7492,8 +7492,8 @@ spec:
 
 参考链接：[https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/devops-admin-faq/#%E5%8D%87%E7%BA%A7-jenkins-agent-%E7%9A%84%E5%8C%85%E7%89%88%E6%9C%AC](https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/devops-admin-faq/#%E5%8D%87%E7%BA%A7-jenkins-agent-%E7%9A%84%E5%8C%85%E7%89%88%E6%9C%AC)
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/3.jpeg)
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/4.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/3.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/4.jpeg)
 
 
 在 KubeSphere 修改 jenkins-casc-config 以后，您需要在 Jenkins Dashboard 系统管理下的 configuration-as-code 页面重新加载您更新过的系统配置。
@@ -7502,10 +7502,11 @@ spec:
 
 [https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB%E9%99%86-jenkins-%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD](https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB%E9%99%86-jenkins-%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD)
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/5.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/5.jpeg)
+
 jenkins中更新base镜像
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/6.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/6.jpeg)
 
 ⚠️先修改kubesphere中jenkins的配置，[jenkins-casc-config](http://xxxxxxxxx:30800/system-workspace/projects/kubesphere-devops-system/configmaps/jenkins-casc-config)
 
@@ -7553,9 +7554,9 @@ mail to: 'xuel@net.com',
           构建URL : ${env.BUILD_URL}"""
 ```
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/7.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/7.jpeg)
 
-![](https://github.com/overnote/awesome-kubernetes-notes/blob/master/source/images/kubesphere/8.jpeg)
+![](https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/8.jpeg)
 
 
 ## 参考链接
