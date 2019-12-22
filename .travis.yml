@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 language: python
 
 python:
@@ -12,9 +12,9 @@ install:
 
 script:
   - wget -c https://github.com/jgm/pandoc/releases/download/2.2.3.2/pandoc-2.2.3.2-linux.tar.gz
-  - tar pandoc-2.2.3.2-linux.tar.gz -C /usr/local
-  - ln -s /usr/local/pandoc-2.2.3.2 /usr/local/pandoc
-  - echo "export PATH=\$PATH:/usr/local/pandoc/bin" >/etc/profile.d/pandoc.sh
-  - source /etc/profile.d/pandoc.sh
-  - $(which pandoc) -s -t rst --toc source/${FILE}.md -o source/${FILE}.rst
+  - sudo tar zxf pandoc-2.2.3.2-linux.tar.gz -C /usr/local
+  - sudo ln -s /usr/local/pandoc-2.2.3.2 /usr/local/pandoc
+  - sudo echo "export PATH=\$PATH:/usr/local/pandoc/bin" >/etc/profile.d/pandoc.sh
+  - sudo source /etc/profile.d/pandoc.sh
+  - sudo $(which pandoc) -s -t rst --toc source/${FILE}.md -o source/${FILE}.rst
   - make html
