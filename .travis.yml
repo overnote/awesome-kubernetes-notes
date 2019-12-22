@@ -4,11 +4,17 @@ language: python
 python:
   - "2.7"
 
+env:
+  - FILE=awesome-kubernetes-notes
+
 install:
-    - pip install sphinx sphinx-autobuild sphinx_rtd_theme
+  - pip install sphinx sphinx-autobuild sphinx_rtd_theme
 
 script:
-    - make html
-    - uname -a
-    - which wget
-    - ls
+  - wget -c https://github.com/jgm/pandoc/releases/download/2.2.3.2/pandoc-2.2.3.2-linux.tar.gz
+  - tar pandoc-2.2.3.2-linux.tar.gz -C /usr/local
+  - ln -s /usr/local/pandoc-2.2.3.2 /usr/local/pandoc
+  - echo "export PATH=\$PATH:/usr/local/pandoc/bin" >/etc/profile.d/pandoc.sh
+  - source /etc/profile.d/pandoc.sh
+  - $(which pandoc) -s -t rst --toc source/${FILE}.md -o source/${FILE}.rst
+  - make html
