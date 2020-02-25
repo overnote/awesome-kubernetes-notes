@@ -7581,10 +7581,6 @@ mail to: 'xuel@net.com',
 ---
 如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流👏
 
-### 请我喝咖啡☕️
+### 请我喝茶
 
-* 微信
-![微信](https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/weixin.png)
-
-* 支付宝
-![支付宝](https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/zfb.png)
+![打赏](/source/zeusro.jpg)
