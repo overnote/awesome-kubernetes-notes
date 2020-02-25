@@ -15,7 +15,7 @@
 <table>
   <tr>
 <td align="center"><a href="https://github.com/redhatxl">    <img src="https://avatars.githubusercontent.com/u/24467514?v=3" width="100px;"        alt="" /><br /><sub><b>redhatxl</b></sub></a><br /><a href="https://juejin.im/user/5c36033fe51d456e4138b473/posts" title="掘金">💬</a><a href="https://www.imooc.com/u/1260704"  title="慕课网">📖</a><a` href="https://github.com/zeusro/awesome-kubernetes-notes/pulls?q=is%3Apr+reviewed-by%3Akentcdodds"    title="Reviewed Pull Requests">👀</a>    <a href="#talk-kentcdodds" title="Talks">📢</a></td>
-           <td align="center"><a href="https://www.zeusro.com/">    <img src="https://avatars.githubusercontent.com/u/5803609?v=3" width="100px;"        alt="" /><br /><sub><b>Zeusro</b></sub></a><br /><a href="" title="Answering Questions">💬</a><a href="https://github.com/zeusro/awesome-kubernetes-notes/commits?author=zeusro"    title="Documentation">📖</a>                    <a href="https://github.com/zeusro/awesome-kubernetes-notes/pulls?q=is%3Apr+reviewed-by%3Akentcdodds"    title="Reviewed Pull Requests">👀</a> <a href="#talk-kentcdodds" title="Talks">📢</a></td>
+           <td align="center"><a href="https://www.zeusro.com/">    <img src="https://avatars.githubusercontent.com/u/5803609?v=3" width="100px;"        alt="" /><br /><sub><b>Zeusro</b></sub></a><br /><a href="" title="Answering Questions">💬</a><a href="https://github.com/zeusro"    title="Documentation">📖</a>                    <a href="https://github.com/zeusro/awesome-kubernetes-notes/pulls?q=is%3Apr+reviewed-by%3Akentcdodds"    title="Reviewed Pull Requests">👀</a> <a href="#talk-kentcdodds" title="Talks">📢</a></td>
   </tr>
 </table>
 
