@@ -3,11 +3,19 @@
 [![Documentation Status](https://readthedocs.org/projects/awesome-kubernetes-notes/badge/?version=latest)](https://awesome-kubernetes-notes.readthedocs.io/en/latest/?badge=latest)  ![](https://img.shields.io/badge/sphinx-python-blue.svg)  ![](https://img.shields.io/badge/python-3.6-green.svg)
 
 # 目的
-为方便更多k8s爱好者更系统性的学习文档，利用`sphinx`将笔记整理构建程在线文档，方便学习交流
+为方便更多k8s爱好者更系统性的学习文档，利用`sphinx`将笔记整理构建程[在线文档](https://github.com/redhatxl/awesome-kubernetes-notes)，方便学习交流
 
-本文 [awesome-kubernetes-notes](https://github.com/redhatxl/awesome-kubernetes-notes)
 
-个人信息：
+贡献者：
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 - [GitHub](https://github.com/redhatxl)
 - [掘金](https://juejin.im/user/5c36033fe51d456e4138b473/posts)
 - [慕课网](https://www.imooc.com/u/1260704)
