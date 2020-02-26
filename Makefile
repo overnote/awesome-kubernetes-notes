@@ -32,8 +32,8 @@ docker_build:
 	docker run -it -p 8000:8000 --rm $(IMAGE)  
 	
 docker: help docker_build
-# rebuild
-auto_commit:  
+
+auto_commit:  rebuild
 	git add .
 	# 需要注意的是，每行命令在一个单独的shell中执行。这些Shell之间没有继承关系。
 	now := "$(shell date)" ;\
