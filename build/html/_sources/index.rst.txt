@@ -10,6 +10,7 @@ Welcome to kaliarch kubernetes-note's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   chapter_0.md
    chapter_1.md
    chapter_2
    chapter_3

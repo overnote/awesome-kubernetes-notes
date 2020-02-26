@@ -43,8 +43,8 @@ source_suffix = ['.rst','.md']
 master_doc = 'index'
 
 # General information about the project.
-project = u'KaliArch\'s awesome-kubernetes-notes'
-copyright = u'2019, kaliarch'
+project = u'Zeusro\'s awesome-kubernetes-notes'
+copyright = u'2020, kaliarch,Zeusro'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
