@@ -7,6 +7,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
+IMAGE 		  = awesome-kubernetes-notes
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -18,3 +19,23 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+rebuild:
+	rm -rf build/
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+docker_build:
+	docker build -t $(IMAGE) .
+	# docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/home/python/docs sphinx-autobuild
+	# docker run -it -p 8000:8000 --rm -v "$(pwd)/source":/home/python/docs  -v "$(pwd)/build/html":/home/python/docs/_build/html $IMAGE
+	# docker run -it -p 8000:8000 --rm -v "$(pwd)/build/html":/home/python/docs/_build/html $IMAGE
+	docker run -it -p 8000:8000 --rm $(IMAGE)  
+	
+docker: help docker_build
+# rebuild
+auto_commit:  
+	git add .
+	# 需要注意的是，每行命令在一个单独的shell中执行。这些Shell之间没有继承关系。
+	now := "$(shell date)" ;\
+	git commit -am '$$now'
+	git push

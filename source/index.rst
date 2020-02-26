@@ -10,7 +10,10 @@ Welcome to kaliarch kubernetes-note's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   chapter_1.md
+   chapter_2
    awesome-kubernetes-notes
+   
 
 
 Indices and tables
