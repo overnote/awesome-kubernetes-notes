@@ -12,6 +12,10 @@ Welcome to kaliarch kubernetes-note's documentation!
 
    chapter_1.md
    chapter_2
+   chapter_3
+   chapter_4
+   chapter_5
+   chapter_6   
    awesome-kubernetes-notes
    
 
