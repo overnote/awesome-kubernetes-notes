@@ -8,6 +8,7 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
 IMAGE 		  = awesome-kubernetes-notes
+now 		  := $(shell date)
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -36,6 +37,5 @@ docker: help docker_build
 auto_commit:  rebuild
 	git add .
 	# 需要注意的是，每行命令在一个单独的shell中执行。这些Shell之间没有继承关系。
-	now := "$(shell date)" ;\
-	git commit -am '$$now'
+	git commit -am "$(now)"
 	git push
