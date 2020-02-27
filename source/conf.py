@@ -42,6 +42,9 @@ source_suffix = ['.rst','.md']
 # The master toctree document.
 master_doc = 'index'
 
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language
+language = 'zh_CN'
+
 # General information about the project.
 project = u'Zeusro\'s awesome-kubernetes-notes'
 copyright = u'2020, kaliarch,Zeusro'
@@ -55,7 +58,7 @@ version = '1.0'
 # The full version, including alpha/beta/rc tags.
 release = '1.0.0'
 
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'default'
 
