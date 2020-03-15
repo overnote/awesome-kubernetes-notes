@@ -180,6 +180,13 @@
   - 24.5 kubesphere 应用路由异常
   - 24.6 Jenkins 的 Agent
   - 24.7 Devops 中 Mail的发送
+  - 24.8 kubesphere应用上传问题
+  - 24.9 跨域问题
+  - 24.10 添加节点
+  - 24.11 K8s集群资源不均
+  - 24.12 kubesphere devops工程
+  - 24.13 kubesphere 应用安装
+  
   
 
 
@@ -207,9 +214,10 @@
 ## TODO
 
 - [x] ETCD详解
-- [ ] 告警配置发送
+- [ ] 事件告警发送
 - [ ] 日志收集
 - [ ] CI/CD的DevOPS相关
+- [ ] 链路健康
 - [x] [国产容器管理平台KubeSphere实战排错](https://kubesphere.io/zh-CN/)
 
 ---

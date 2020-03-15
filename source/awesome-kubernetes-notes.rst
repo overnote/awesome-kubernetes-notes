@@ -1610,6 +1610,60 @@ workingDir
 6.2.6.3 env 传递环境变量
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+-  Use Pod fields
+
+.. code:: yaml
+
+         env:
+           - name: MY_NODE_NAME
+             valueFrom:
+               fieldRef:
+                 fieldPath: spec.nodeName
+           - name: MY_POD_NAME
+             valueFrom:
+               fieldRef:
+                 fieldPath: metadata.name
+           - name: MY_POD_NAMESPACE
+             valueFrom:
+               fieldRef:
+                 fieldPath: metadata.namespace
+           - name: MY_POD_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.podIP
+           - name: MY_POD_SERVICE_ACCOUNT
+             valueFrom:
+               fieldRef:
+                 fieldPath: spec.serviceAccountName
+                 
+                 
+
+-  Use Container fields
+
+.. code:: yaml
+
+         env:
+           - name: MY_CPU_REQUEST
+             valueFrom:
+               resourceFieldRef:
+                 containerName: test-container
+                 resource: requests.cpu
+           - name: MY_CPU_LIMIT
+             valueFrom:
+               resourceFieldRef:
+                 containerName: test-container
+                 resource: limits.cpu
+           - name: MY_MEM_REQUEST
+             valueFrom:
+               resourceFieldRef:
+                 containerName: test-container
+                 resource: requests.memory
+           - name: MY_MEM_LIMIT
+             valueFrom:
+               resourceFieldRef:
+                 containerName: test-container
+                 resource: limits.memory
+
 .. code:: yaml
 
    在容器中获取 POD 的信息
@@ -1623,10 +1677,21 @@ workingDir
 
 -  command 定义容器运行的程序，详见：
 
+https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
+
 一个 entrypoint array 而 command 启动的程序是不会运行在 Shell
 中的，如果想要运行在 Shell
 中需要自己填写，如果没有提供这个指令，那么将运行 docker 镜像中的
 ENTRYPOINT。
+
+================ ============= ================= ============== ==================
+Image Entrypoint Image Cmd     Container command Container args Command run
+================ ============= ================= ============== ==================
+``[/ep-1]``      ``[foo bar]``                                  ``[ep-1 foo bar]``
+``[/ep-1]``      ``[foo bar]`` ``[/ep-2]``                      ``[ep-2]``
+``[/ep-1]``      ``[foo bar]``                   ``[zoo boo]``  ``[ep-1 zoo boo]``
+``[/ep-1]``      ``[foo bar]`` ``[/ep-2]``       ``[zoo boo]``  ``[ep-2 zoo boo]``
+================ ============= ================= ============== ==================
 
 6.2.6.5 args CMD
 ^^^^^^^^^^^^^^^^
@@ -1640,6 +1705,14 @@ args 那么镜像中的 CMD 字段不再作为参数进行传递。
 如果在 args 中引用了变量，则需要使用 $(VAR_NAME)
 来引用一个变量，如果不想在这里进行命令替换，那么可以
 $$(VAR_NAME)，转义后在容器内使用。
+
+.. code:: yaml
+
+   env:
+   - name: MESSAGE
+     value: "hello kaliarch"
+   command: ["/bin/echo"]
+   args: ["$(MESSAGE)"]
 
 6.2.6.6 annotations 注解信息
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1895,7 +1968,7 @@ service 上。
 POD控制器
 
 控制器管理的 POD 可以实现，自动维护 POD 副本数量，它能实现 POD
-的扩容和缩容，但是不能实现滚的那个更新等高级功能。
+的扩容和缩容，但是不能实现滚动更新等高级功能。
 
 +-----------------+----------------------------------------------------+
 | 名称            | 作用                                               |
@@ -2013,6 +2086,8 @@ Deployment 通过控制 ReplicaSet 来实现功能，除了支持 ReplicaSet
 Deployment 在滚动更新时候，通过控制多个 ReplicaSet 来实现，ReplicaSet
 又控制多个 POD，多个 ReplicaSet 相当于多个应用的版本。
 
+|image0|
+
 .. code:: mermaid
 
    graph TB
@@ -2062,10 +2137,14 @@ Deployment 在滚动更新时候，通过控制多个 ReplicaSet 来实现，Rep
 
 .. code:: bash
 
-   type：                # 更新类型，Recreate 滚动更新，RollingUpdate 滚动更新策略
+   type：                # 更新类型，Recreate 替换更新，RollingUpdate 滚动更新策略
    rollingUpdate：       # 滚动更新时候的策略，这是默认的更新策略
        maxSurge：        # 滚动更新时候允许临时超出多少个，可以指定数量或者百分比，默认 25%
        maxUnavailable：  # 最多允许多少个 POD 不可用，默认 25%
+
+-  Recreate：替换更新会先删除旧的容器组，在创建新的容器组，升级过程中业务会中断
+
+-  RollingUpdate：滚动更新将逐步用新版本的实例替代旧版本的实例，升级过程中，业务流量会同时负载到新旧两个版本的POD上，因此业务不会中断。
 
 5. revisionHistoryLimit
    滚动更新后最多保存多少个更新的历史版本，值为一个数字
@@ -2851,6 +2930,29 @@ node 节点挂掉，那么数据有可能丢失，如果 POD
 
 它其实是建立在 emptyDir 的基础上，但是对卷的操作不会同步到 gitrepo 上。
 
+注意：需要在各运行pod的node节点上安装git工具，用于git的拉取
+
+.. code:: yaml
+
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     labels:
+       run: gitrepo
+     name: gitrepo
+   spec:
+     containers:
+     - image: nginx:latest
+       name: gitrepo
+       volumeMounts:
+         - name: gitrepo
+           mountPath: /usr/share/nginx/html
+     volumes:
+       - name: gitrepo
+         gitRepo:
+           repository: "https://gitee.com/rocket049/mysync.git"
+           revision: "master"
+
 10.3.3 emptyDir缓存卷
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -3004,6 +3106,8 @@ nfs 服务器是存在于集群之外的服务器，它不受 node 节点的影�
          nfs:
            path: /data/volumes
            server: 172.16.100.104
+
+注意⚠️：各个node节点也需要安装\ ``yum install nfs-utils``,不让在挂载的时候会出现异常。
 
 10.5 分布式存储
 ---------------
@@ -4287,8 +4391,8 @@ RBAC 中，用户授权就是授权某个角色。
 
 .. code:: bash
 
-   - rule（角色）、rolebinding（角色绑定）
-   - clausterrole（集群角色）、clusterrolebinding（集群角色绑定）
+   - role（角色）、rolebinding（角色绑定）
+   - clusterrole（集群角色）、clusterrolebinding（集群角色绑定）
 
 -  授权类型
 
@@ -4296,14 +4400,14 @@ RBAC 中，用户授权就是授权某个角色。
 
    - 用户通过 rolebinding 去 bind rule，rolebinding 只能是当前命名空间中
    - 通过 clusterrolebinding 去 bind clausterrole，clusterrolebinding会在所有名称空间生效
-   - 通过 rolebinding 去 bind clausterrole，由于 rolebinding 只在当前名称空间，所以 clausterrole 权限被限制为当前名称空间
+   - 通过 rolebinding 去 bind clausterrole，由于 rolebinding 只在当前名称空间，所以 clusterrole 权限被限制为当前名称空间
 
--  通过 rolebinding 去 bind clausterrole 的好处
+-  通过 rolebinding 去 bind clusterrole 的好处
 
 .. code:: bash
 
-   如果有很多名称空间、如果用 rolebinding 绑定 rule，那么则需要在每个名称空间都定义 role
-   如果使用 rolebinding 绑定一个 clausterrole ，由于 clausterrole 拥有所有名称空间的权限，而 rolebinding  只能绑定当前名称空间，那么就省去为每个名称空间都新建一个 role 的过程了。
+   如果有很多名称空间、如果用 rolebinding 绑定 role，那么则需要在每个名称空间都定义 role
+   如果使用 rolebinding 绑定一个 clausterrole ，由于 clusterrole 拥有所有名称空间的权限，而 rolebinding  只能绑定当前名称空间，那么就省去为每个名称空间都新建一个 role 的过程了。
 
 14.1 权限列表
 -------------
@@ -4471,7 +4575,7 @@ RBAC 中，用户授权就是授权某个角色。
 14.6 rolebinding 与 clusterrole
 -------------------------------
 
-如果使用 rolebinding 绑定一个 clausterrole ，由于 clausterrole
+如果使用 rolebinding 绑定一个 clusterrole ，由于 clusterrole
 拥有所有名称空间的权限，而 rolebinding
 只能绑定当前名称空间，那么就省去为每个名称空间都新建一个 role 的过程了。
 
@@ -7043,7 +7147,7 @@ etcd是CoreOS团队于2013年6月发起的开源项目，它的目标是构建�
 23.1.2 发展历史
 ~~~~~~~~~~~~~~~
 
-|image0|
+|image1|
 
 23.1.3 ETCD特点
 ~~~~~~~~~~~~~~~
@@ -7121,7 +7225,7 @@ etcd认为写入请求被Leader节点处理并分发给了多数节点后，就�
 23.2.1 架构图
 ~~~~~~~~~~~~~
 
-|image1|
+|image2|
 
 23.2.2 架构解析
 ~~~~~~~~~~~~~~~
@@ -7154,13 +7258,16 @@ etcd认为写入请求被Leader节点处理并分发给了多数节点后，就�
 
 -  前后端业务注册发现
 
-|image2|
+|image3|
 
 中间价已经后端服务在etcd中注册，前端和中间价可以很轻松的从etcd中发现相关服务器然后服务器之间根据调用关系相关绑定调用
 
 -  多组后端服务器注册发现
 
-|image3|
+.. figure:: /Users/xuel/Library/Application%20Support/typora-user-images/image-20200315175200809.png
+   :alt: image-20200315175200809
+
+   image-20200315175200809
 
 后端多个无状态相同副本的app可以同事注册到etcd中，前端可以通过haproxy从etcd中获取到后端的ip和端口组，然后进行请求转发，可以用来故障转移屏蔽后端端口已经后端多组app实例。
 
@@ -7204,7 +7311,10 @@ etcd可以充当消息中间件，生产者可以往etcd中注册topic并发送�
 23.3.7 集群及爱你与Leader选举
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image9|
+.. figure:: /Users/xuel/Library/Application%20Support/typora-user-images/image-20200315175441952.png
+   :alt: image-20200315175441952
+
+   image-20200315175441952
 
 etcd可以根据raft算法在多个node节点来选举出leader
 
@@ -7254,7 +7364,7 @@ etcd可以根据raft算法在多个node节点来选举出leader
 23.4.2.1 主机信息
 ^^^^^^^^^^^^^^^^^
 
-|image10|
+|image9|
 
 ========= ========== =========== ========
 主机名称  系统       IP地址      部署组件
@@ -8110,7 +8220,7 @@ etcd-0-14配置：
 
 查看docker启动配置
 
-|image11|
+|image10|
 
 修改文件/etc/systemd/system/docker.service.d/docker-options.conf中去掉参数：–iptables=false
 这个参数等于false时会不写iptables
@@ -8127,7 +8237,7 @@ etcd-0-14配置：
 
 ⚠️注意：ingress控制deployment在：
 
-|image12|
+|image11|
 
 .. code:: yaml
 
@@ -8186,7 +8296,7 @@ agent 都是一个Pod，如果要替换内置的agent，就需要替换 agent �
 
 参考链接：\ https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/devops-admin-faq/#%E5%8D%87%E7%BA%A7-jenkins-agent-%E7%9A%84%E5%8C%85%E7%89%88%E6%9C%AC
 
-|image13| |image14|
+|image12|\ |image13|
 
 在 KubeSphere 修改 jenkins-casc-config 以后，您需要在 Jenkins Dashboard
 系统管理下的 configuration-as-code 页面重新加载您更新过的系统配置。
@@ -8195,11 +8305,11 @@ agent 都是一个Pod，如果要替换内置的agent，就需要替换 agent �
 
 https://kubesphere.io/docs/advanced-v2.0/zh-CN/devops/jenkins-setting/#%E7%99%BB%E9%99%86-jenkins-%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD
 
-|image15|
+|image14|
 
 jenkins中更新base镜像
 
-|image16|
+|image15|
 
 ⚠️先修改kubesphere中jenkins的配置，\ `jenkins-casc-config <http://xxxxxxxxx:30800/system-workspace/projects/kubesphere-devops-system/configmaps/jenkins-casc-config>`__
 
@@ -8308,9 +8418,374 @@ jenkins中更新base镜像
              构建状态 : ${env.JOB_NAME} jenkins 发布运行正常
              构建URL : ${env.BUILD_URL}"""
 
+.. figure:: /Users/xuel/Library/Application%20Support/typora-user-images/image-20200315180012132.png
+   :alt: image-20200315180012132
+
+   image-20200315180012132
+
+|image16|
+
+24.8 kubesphere应用上传问题
+---------------------------
+
+24.8.1 文件上传413
+~~~~~~~~~~~~~~~~~~
+
+将应用部署进入kubesphere中，应用中有设置上传文件功能，测试上次异常无法正常上传，文件上传，ingress413报错，kubesphere使用的是ingress-nginx控制器，可以在其中注解添加k-v来支持，
+
+解决方案：应用路由自定义max body size
+
+https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size
+
+24.8.2 大文件上传后端504
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+大文件上传后端响应504解决方案：
+
+.. code:: shell
+
+   proxy read timeoutnginx.ingress.kubernetes.io/proxy-read-timeout
+
+24.9 跨域问题
+-------------
+
+kubesphere使用ingress-nginx支持跨域，可以参考以下链接在注解中添加
+
+https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#enable-cors
+
+测试环境可以使用可以使用hosts，将域名解析到本地，前端利用nginx来做静态文件服务，反向代理后端api，可以参考示例：
+
+.. code:: shell
+
+   server {
+     listen 80;
+     server_name localhost;
+     # 强制https跳转
+     # rewrite ^(.*)$ https://$host$1 permanent;
+     location / {
+       index      index.html;
+       root       /smart-frontend;
+       try_files $uri $uri/ /index.html;
+       client_body_buffer_size 200m;
+       charset utf-8;
+     }
+     location /api {
+         proxy_pass http://smart-backend:8080/api;
+         proxy_read_timeout 1200;
+         client_max_body_size 1024m;
+     }
+         gzip  on; #开启gzip
+         gzip_vary on;
+         gzip_min_length 1k; #不压缩临界值,大于1k的才压缩,一般不用改
+         gzip_buffers 4 16k;
+         gzip_comp_level 6; #压缩级别,数字越大压缩的越好
+         gzip_types  text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png image/x-icon;
+   }
+
+24.10 添加节点
+--------------
+
+后期逐渐业务上来，集群节点资源不足，新增node节点，将node节点的数据盘添加到ceph节点
+
+24.10.1 ceph集群添加节点
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  系统配置
+
+-  免费密钥配置
+
+-  hosts配置
+
+-  docker安装并迁移至数据盘
+
+-  cgroup启用
+
+-  ceph数据节点添加
+
+ceph集群配置添加node03集群的数据盘节点（如果数据存储类足够，可以不用添加数据节点）
+
+.. code:: shell
+
+   [root@node03 docker]# mkfs.xfs /dev/vdd
+   [root@node03 docker]# mkdir -p /var/local/osd3
+   [root@node03 docker]# mount /dev/vdd /var/local/osd3/
+
+   添加vdd到/etc/fstab中
+   [root@node03 docker]# yum -y install yum-plugin-priorities epel-release
+
+   [root@node03 yum.repos.d]# chmod 777 -R /var/local/osd3/
+   [root@node03 yum.repos.d]# chmod 777 -R /var/local/osd3/*  master节点利用ceph-deploy部署node03节点[root@master ceph]# ceph-deploy install node03
+   [root@master ceph]# ceph-deploy  gatherkeys master
+   [root@master ceph]# ceph-deploy osd prepare node03:/var/local/osd3
+
+-  激活osd
+
+.. code:: shell
+
+   [root@master ceph]# ceph-deploy osd activate node03:/var/local/osd3
+
+-  查看状态
+
+.. code:: shell
+
+   [root@master ceph]# ceph-deploy osd list master node01 node02 node03
+
+-  拷贝密钥
+
+.. code:: shell
+
+   [root@master ceph]# ceph-deploy admin master node01 node02 node03
+
+-  在node03节点设置权限
+
+.. code:: shell
+
+   [root@node03 yum.repos.d]# chmod +r /etc/ceph/ceph.client.admin.keyring
+
+-  在master设置MDS
+
+.. code:: shell
+
+   [root@master ceph]# ceph-deploy mds create node01 node02 node03
+
+-  查看状态
+
+.. code:: shell
+
+   [root@master ceph]# ceph health
+   [root@master ceph]# ceph - 由于是新增node节点，数据需要平衡回填，此刻查看集群状态[root@master conf]# ceph -s
+       cluster 5b9eb8d2-1c12-4f6d-ae9c-85078795794b
+        health HEALTH_ERR
+               44 pgs backfill_wait
+               1 pgs backfilling
+               1 pgs inconsistent
+               45 pgs stuck unclean
+               recovery 1/55692 objects degraded (0.002%)
+               recovery 9756/55692 objects misplaced (17.518%)
+               2 scrub errors
+        monmap e1: 1 mons at {master=172.16.60.2:6789/0}
+               election epoch 35, quorum 0 master
+        osdmap e2234: 4 osds: 4 up, 4 in; 45 remapped pgs
+               flags sortbitwise,require_jewel_osds
+         pgmap v5721471: 192 pgs, 2 pools, 104 GB data, 27846 objects
+               230 GB used, 1768 GB / 1999 GB avail
+               1/55692 objects degraded (0.002%)
+               9756/55692 objects misplaced (17.518%)
+                    146 active+clean
+                     44 active+remapped+wait_backfill
+                      1 active+remapped+backfilling
+                      1 active+clean+inconsistent
+   recovery io 50492 kB/s, 13 objects/s
+     client io 20315 B/s wr, 0 op/s rd, 5 op/s wr 
+
+-  最终的问题，目前由于新增了node节点，新增ceph数据节点需要数据同步
+
+.. code:: shell
+
+   [root@master conf]# ceph -s
+       cluster 5b9eb8d2-1c12-4f6d-ae9c-85078795794b
+        health HEALTH_ERR
+               1 pgs inconsistent
+               2 scrub errors
+        monmap e1: 1 mons at {master=172.16.60.2:6789/0}
+               election epoch 35, quorum 0 master
+        osdmap e2324: 4 osds: 4 up, 4 in
+               flags sortbitwise,require_jewel_osds
+         pgmap v5723479: 192 pgs, 2 pools, 104 GB data, 27848 objects
+               229 GB used, 1769 GB / 1999 GB avail
+                    191 active+clean
+                      1 active+clean+inconsistent
+     client io 78305 B/s wr, 0 op/s rd, 18 op/s wr修复[root@master conf]# ceph -s
+       cluster 5b9eb8d2-1c12-4f6d-ae9c-85078795794b
+        health HEALTH_OK
+        monmap e1: 1 mons at {master=172.16.60.2:6789/0}
+               election epoch 35, quorum 0 master
+        osdmap e2324: 4 osds: 4 up, 4 in
+               flags sortbitwise,require_jewel_osds
+         pgmap v5724320: 192 pgs, 2 pools, 104 GB data, 27848 objects
+               229 GB used, 1769 GB / 1999 GB avail
+                    192 active+clean
+     client io 227 kB/s wr, 0 op/s rd, 7 op/s wr
+   # 同步完成
+   [root@master conf]# ceph health
+   HEALTH_OK
+
+24.10.2 node节点添加
+~~~~~~~~~~~~~~~~~~~~
+
+kubesphere为方便新增节点，提供了方便的脚步一键新增，可参考：https://kubesphere.com.cn/docs/v2.1/zh-CN/installation/add-nodes/
+
+修改host.ini
+
+.. code:: [all]
+
+   master ansible_connection=local  ip=172.16.60.2
+   node01  ansible_host=172.16.60.3  ip=172.16.60.3 
+   node02  ansible_host=172.16.60.4  ip=172.16.60.4
+   node03  ansible_host=172.16.60.5  ip=172.16.60.5
+   [kube-master]
+   master           
+   [kube-node]
+   master
+   node01   
+   node02
+   node03
+
+在 “/script” 目录执行
+add-nodes.sh脚本。待扩容脚本执行成功后，即可看到包含新节点的集群节点信息，可通过
+KubeSphere 控制台的菜单选择 基础设施 然后进入 主机管理
+页面查看，或者通过 Kubectl 工具执行 kubectl get
+node命令，查看扩容后的集群节点详细信息。
+
+.. code:: shell
+
+   [root@master scripts]# ./add-nodes.sh
+
+查看验证
+
+.. code:: shell
+
+   [root@master conf]# kubectl get nodes -owide
+   NAME     STATUS   ROLES         AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION          CONTAINER-RUNTIME
+   master   Ready    master        136d   v1.15.5   172.16.60.2   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://18.6.2
+   node01   Ready    node,worker   136d   v1.15.5   172.16.60.3   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://18.6.2
+   node02   Ready    node,worker   136d   v1.15.5   172.16.60.4   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://18.6.2
+   node03   Ready    worker        10m    v1.15.5   172.16.60.5   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://19.3.5
+   [root@master conf]# kubectl label node  node-role.kubernetes.io/node=
+   common.yaml            hosts.ini              plugin-qingcloud.yaml  
+   [root@master conf]# kubectl label node node03  node-role.kubernetes.io/node=   
+   node/node03 labeled
+   [root@master conf]# kubectl get nodes -owide                                
+   NAME     STATUS   ROLES         AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION          CONTAINER-RUNTIME
+   master   Ready    master        136d   v1.15.5   172.16.60.2   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://18.6.2
+   node01   Ready    node,worker   136d   v1.15.5   172.16.60.3   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://18.6.2
+   node02   Ready    node,worker   136d   v1.15.5   172.16.60.4   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://18.6.2
+   node03   Ready    node,worker   11m    v1.15.5   172.16.60.5   <none>        CentOS Linux 7 (Core)   3.10.0-693.el7.x86_64   docker://19.3.5
+   [root@master conf]# 
+
 |image17|
 
+24.11 K8s集群资源不均
+---------------------
+
+可以发现k8s资源使用不均衡，之前的部署应用为制定nodeSelect，导致一些系统服务运行在node节点，查看node2内存占用很大,导致集群异常告警或重启
+
 |image18|
+
+可以通过查看
+
+.. code:: shell
+
+   kubectl get pods -o wide --all-namespaces |grep node02 |awk '{print $1,  $2}'
+
+将一些系统应用通过nodeselect来调度到master节点，以减轻node2节点的内存压力。
+
+.. code:: shell
+
+   `kubectl  get nodes --show-labels`
+
+在node2上查看系统组建添加nodeselector来重新调度
+
+.. code:: shell
+
+         nodeSelector:
+           node-role.kubernetes.io/master: master
+
+|image19|
+
+查看现存在node2上面的kubesphere系统deployment
+
+|image20|
+
+通过调度完成，查看node2的内存负载已经下来了
+
+|image21|
+
+24.12 kubesphere devops工程
+---------------------------
+
+新增了node03节点，devops工程一周为队列中为此时运行该job的实例未完成初始化，登录集群查看，node03上的base
+pod在pull agent镜像，为了快速，直接在node节点，save
+base镜像然后在node03上load
+
+|image22|
+
+.. code:: shell
+
+   [root@master ~]# kubectl describe pods -n kubesphere-devops-system $(kubectl get pods -n kubesphere-devops-system |grep -E "^base" |awk '{print $1}')
+
+|image23|
+
+24.13 kubesphere 应用安装
+-------------------------
+
+目前自己的kubesphere集群为2.1，在具体的在项目中添加了repo后，后台回自己去同步镜像数据还是需要为手动在那个地方触发下，我添加了几个helm
+的repo，好像里面的chart没有在web界面显示，在添加了repo的项目下，我新建应用，然后选择来自kubesphere的应用商店，其中只有几个charts，发现不了添加的helm
+源的chartscharts，在服务器内部是可以使用命令search到。咨询社区暂时为收到回复，记得v2.0版本后台有个任务会去同步charts，目前2.1版本，先使用helm命令在集群内进行手动helm安装
+
+.. code:: shell
+
+   [root@master common-service]# helm install -n consul --namespace common-service -f consul/values-production.yaml consul/
+   NAME:   consul
+   LAST DEPLOYED: Tue Jan 14 17:56:27 2020
+   NAMESPACE: common-service
+   STATUS: DEPLOYED
+
+
+   RESOURCES:
+   ==> v1/Pod(related)
+   NAME      READY  STATUS   RESTARTS  AGE
+   consul-0  0/2    Pending  0         0s
+
+
+   ==> v1/Service
+   NAME       TYPE       CLUSTER-IP   EXTERNAL-IP  PORT(S)                                                AGE
+   consul     ClusterIP  None         <none>       8400/TCP,8301/TCP,8301/UDP,8300/TCP,8600/TCP,8600/UDP  1s
+   consul-ui  ClusterIP  10.233.59.7  <none>       80/TCP                                                 1s
+   ==> v1/StatefulSet
+   NAME    READY  AGE
+   consul  0/3    0s
+
+
+   ==> v1beta1/PodDisruptionBudget
+   NAME        MIN AVAILABLE  MAX UNAVAILABLE  ALLOWED DISRUPTIONS  AGE
+   consul-pdb  1              N/A              0                    1s
+
+
+   NOTES:
+     ** Please be patient while the chart is being deployed **
+
+
+     Consul can be accessed within the cluster on port 8300 at consul.common-service.svc.cluster.local
+
+
+   In order to access to the Consul Web UI:
+
+
+       kubectl port-forward --namespace common-service svc/consul-ui 80:80
+       echo "Consul URL: http://127.0.0.1:80"
+
+
+   Please take into account that you need to wait until a cluster leader is elected before using the Consul Web UI.
+
+
+   In order to check the status of the cluster you can run the following command:
+
+
+       kubectl exec -it consul-0 -- consul members
+
+
+   Furthermore, to know which Consul node is the cluster leader run this other command:
+
+
+       kubectl exec -it consul-0 -- consul operator raf
+
+.. figure:: /Users/xuel/Library/Application%20Support/typora-user-images/image-20200125133812075.png
+   :alt: image-20200125133812075
+
+   image-20200125133812075
+
+具体问题可以参考帖子：https://kubesphere.com.cn/forum/d/669-kubesphere
 
 参考链接
 --------
@@ -8340,31 +8815,37 @@ jenkins中更新base镜像
 
 如果此笔记对您有任何帮助，更多文章，欢迎关注博客一块学习交流👏
 
+​
+
 请我喝咖啡☕️
 ~~~~~~~~~~~~
 
--  微信 |微信|
-
+-  微信 |微信|)
 -  支付宝 |支付宝|
 
-.. |image0| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/1.png
-.. |image1| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/2.png
-.. |image2| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/3.png
-.. |image3| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/4.png
-.. |image4| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/5.png
-.. |image5| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/6.png
-.. |image6| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/7.png
-.. |image7| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/8.png
-.. |image8| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/9.png
-.. |image9| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/10.png
-.. |image10| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/etcd/11.png
-.. |image11| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/1.jpeg
-.. |image12| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/2.jpeg
-.. |image13| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/3.jpeg
-.. |image14| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/4.jpeg
-.. |image15| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/5.jpeg
-.. |image16| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/6.jpeg
-.. |image17| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/7.jpeg
-.. |image18| image:: https://raw.githubusercontent.com/overnote/awesome-kubernetes-notes/master/source/images/kubesphere/8.jpeg
-.. |微信| image:: https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/weixin.png
-.. |支付宝| image:: https://raw.githubusercontent.com/redhatxl/awesome-kubernetes-notes/master/source/zfb.png
+.. |image0| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315174806.png
+.. |image1| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315174937.png
+.. |image2| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175005.png
+.. |image3| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175135.png
+.. |image4| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175211.png
+.. |image5| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175304.png
+.. |image6| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175330.png
+.. |image7| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175402.png
+.. |image8| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175420.png
+.. |image9| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175452.png
+.. |image10| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175714.png
+.. |image11| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175735.png
+.. |image12| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175826.png
+.. |image13| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175841.png
+.. |image14| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175918.png
+.. |image15| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315175938.png
+.. |image16| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180020.png
+.. |image17| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180530.png
+.. |image18| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180550.png
+.. |image19| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180603.png
+.. |image20| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180621.png
+.. |image21| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180634.png
+.. |image22| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180658.png
+.. |image23| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315180736.png
+.. |微信| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315181628.png
+.. |支付宝| image:: https://kaliarch-bucket-1251990360.cos.ap-beijing.myqcloud.com/blog_img/20200315181115.png
